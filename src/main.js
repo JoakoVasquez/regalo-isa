@@ -5,12 +5,19 @@ import { AudioSys } from './audio.js';
 import { Menu } from './menu.js';
 import { Dialogue } from './dialogue.js';
 import { PostFX } from './postfx.js';
-import { Sandbox } from './sandbox.js';
 import { Mission1 } from './mision1.js';
 import { Mission2 } from './mision2.js';
 import { Mission3 } from './mision3.js';
 import { Mission4 } from './mision4.js';
 import { Mission5 } from './mision5.js';
+import { Mission6 } from './mision6.js';
+import { Mission7 } from './mision7.js';
+import { Mission8 } from './mision8.js';
+import { Duelo } from './duelo.js';
+import { Trencito } from './trencito.js';
+import { Limones } from './limones.js';
+import { Progress } from './progreso.js';
+import { Eggs } from './huevos.js';
 import { setupCursor } from './cursor.js';
 
 const $ = (s) => document.querySelector(s);
@@ -26,26 +33,38 @@ const audio = new AudioSys();
 // copia: las misiones agregan hablantes propios (p. ej. "grupo") sin tocar la lista de Miis
 const dialogue = new Dialogue(audio, { ...CONFIG.characters });
 const postfx = new PostFX(renderer);
-const sandbox = new Sandbox({ audio, dialogue });
 const mission1 = new Mission1({ audio, dialogue, onEnd: (r) => showResult(r) });
 const mission2 = new Mission2({ audio, dialogue, onEnd: (r) => showResult(r) });
 const mission3 = new Mission3({ audio, dialogue, onEnd: (r) => showResult(r) });
 const mission4 = new Mission4({ audio, dialogue, onEnd: (r) => showResult(r) });
 const mission5 = new Mission5({ audio, dialogue, onEnd: (r) => showResult(r) });
-const menu = new Menu(audio, { onStart: startGame });
+const mission6 = new Mission6({ audio, dialogue, onEnd: (r) => showResult(r) });
+const mission7 = new Mission7({ audio, dialogue, onEnd: (r) => showResult(r) });
+const mission8 = new Mission8({ audio, dialogue, onEnd: (r) => showResult(r) });
+const progress = new Progress();
+const duelo = new Duelo({ audio, dialogue, progress, id: 'duelo', onEnd: (r) => showResult(r) });
+const trencito = new Trencito({ audio, dialogue, progress, id: 'trencito', onEnd: (r) => showResult(r) });
+const limones = new Limones({ audio, dialogue, progress, id: 'limones', onEnd: (r) => showResult(r) });
+const eggs = new Eggs({ audio, progress });
+const menu = new Menu(audio, { onStart: startGame, progress });
 
 // Cada casilla del menú → su escena y su música
 const SCENES = {
-  sandbox: { scene: sandbox, music: 'sandbox' },
   m1: { scene: mission1, music: 'plaza' },
   m2: { scene: mission2, music: 'sala' },
   m3: { scene: mission3, music: 'disco' },
   m4: { scene: mission4, music: null }, // sin música: suena el reel
   m5: { scene: mission5, music: 'puentes' },
+  m6: { scene: mission6, music: 'cocina' },
+  m7: { scene: mission7, music: 'parque' },
+  m8: { scene: mission8, music: 'concurso' },
+  duelo: { scene: duelo, music: 'cocina' },
+  trencito: { scene: trencito, music: 'disco' },
+  limones: { scene: limones, music: 'parque' },
 };
-let curId = 'sandbox';
-let cur = sandbox;
-const sandboxHint = $('#hint').innerHTML;
+let curId = 'm1';
+let cur = mission1;
+const defaultHint = $('#hint').innerHTML;
 
 let mode = 'boot'; // 'boot' | 'menu' | 'game'
 let paused = false;
@@ -110,9 +129,10 @@ async function startGame(id = curId) {
   curId = id;
   cur = SCENES[id].scene;
   cur.reset();
+  eggs.attach(id, cur);
   const ch = CONFIG.channels.find((c) => c.id === id);
   $('.pause-bottom span').textContent = ch ? ch.title : '';
-  $('#hint').innerHTML = cur.hint ?? sandboxHint;
+  $('#hint').innerHTML = cur.hint ?? defaultHint;
   mode = 'game';
   setPaused(false);
   $('#hud').classList.remove('hidden');
@@ -130,6 +150,7 @@ async function backToMenu() {
   hideResult();
   dialogue.cancel();
   cur.exit?.();
+  eggs.detach();
   $('#hud').classList.add('hidden');
   document.body.classList.add('show-cursor');
   menu.show();
@@ -159,17 +180,20 @@ document.querySelectorAll('#pause .pill').forEach((b, i) => {
 
 // ───────────── Fin de misión ─────────────
 // el título y el texto los manda cada misión (están en src/misionN_dialogos.js)
-async function showResult({ win, title = '', text = '' }) {
+// icon / again: los minijuegos arcade ponen su propio ícono y dejan "Jugar otra vez" primero
+async function showResult({ win, title = '', text = '', icon = null, again = false }) {
+  if (win) progress.complete(curId); // abre el capítulo siguiente (y la carta, si es el último)
   await wait(win ? 900 : 300);
   const el = $('#result');
   el.classList.toggle('win', win);
   el.classList.toggle('lose', !win);
-  $('#resIcon').textContent = win ? '★' : '💀';
+  $('#resIcon').textContent = icon ?? (win ? '★' : '💀');
   $('#resTitle').textContent = title;
   $('#resText').textContent = text;
   const buttons = win
     ? [{ label: 'Volver al menú', act: () => backToMenu() }, { label: 'Jugar otra vez', act: () => startGame(curId) }]
     : [{ label: 'Reintentar', act: () => startGame(curId) }, { label: 'Menú', act: () => backToMenu() }];
+  if (again) buttons.reverse();
   const box = $('#resButtons');
   box.innerHTML = '';
   buttons.forEach((b, i) => {
@@ -242,6 +266,7 @@ addEventListener('keydown', (e) => {
     return;
   }
   if (isA) cur.pressA();
+  else if (DIRS[e.code] && cur.pressDir) cur.pressDir(...DIRS[e.code]); // p. ej. revolver en el capítulo 6
   else if (e.code === 'KeyC' && cur.toggleCrowd) { audio.play('select'); cur.toggleCrowd(); }
 });
 addEventListener('keyup', (e) => held.delete(e.code));
@@ -252,6 +277,11 @@ $('#boot').addEventListener('click', bootContinue);
 let dragX = 0, dragging = false, lastDragX = 0;
 canvas.addEventListener('mousedown', (e) => { dragging = true; lastDragX = e.clientX; });
 addEventListener('mouseup', () => { dragging = false; });
+// Corazón escondido: un clic encima lo recoge (en captura, para que sirva aunque haya interfaz encima)
+addEventListener('mousedown', (e) => {
+  if (mode !== 'game' || paused || result || $('#fade').classList.contains('on')) return;
+  if (eggs.click(e.clientX, e.clientY)) { e.stopPropagation(); dragging = false; }
+}, true);
 addEventListener('mousemove', (e) => {
   if (!dragging) return;
   dragX += e.clientX - lastDragX;
@@ -276,8 +306,10 @@ function moveInput() {
 // ───────────── Cursor de mano ─────────────
 const cursor = $('#cursor');
 let cx = 0, cy = 0, tilt = 0, lastX = 0;
+let mouseT = 0; // segundos desde que se movió el mouse: la mano aparece un rato para poder apuntar
 addEventListener('mousemove', (e) => {
   cx = e.clientX; cy = e.clientY;
+  mouseT = 0;
   cursor.classList.add('seen');
 });
 function updateCursor(dt) {
@@ -314,8 +346,11 @@ function frame() {
     const rot = rotateInput(dt);
     if (!dialogue.active && rot) cur.rotateCamera?.(rot);
     cur.update(dt, dialogue.active ? { x: 0, z: 0 } : moveInput());
-    // el cursor de mano solo aparece cuando hay algo que apuntar
-    document.body.classList.toggle('show-cursor', dialogue.active || !!result || !!cur.wantsCursor);
+    eggs.update(dt);
+    // el cursor de mano aparece cuando hay algo que apuntar, o un rato después de mover el mouse
+    // (si queda un corazón escondido por encontrar en este capítulo)
+    mouseT += dt;
+    document.body.classList.toggle('show-cursor', dialogue.active || !!result || !!cur.wantsCursor || (eggs.active && mouseT < 2));
   }
   renderer.info.reset();
   postfx.render(cur.scene, cur.camera);
@@ -324,4 +359,4 @@ function frame() {
 frame();
 
 // para depurar desde la consola
-window.game = { sandbox, mission1, mission2, mission3, mission4, mission5, dialogue, audio, menu, renderer, start: startGame, get cur() { return cur; } };
+window.game = { mission1, mission2, mission3, mission4, mission5, mission6, mission7, mission8, duelo, trencito, limones, progress, eggs, dialogue, audio, menu, renderer, start: startGame, get cur() { return cur; } };

@@ -1,0 +1,32 @@
+{
+  "_info": "Cocina del Capítulo 6 (pie de limón). Coordenadas del juego: x = de izquierda a derecha mirando la pared del fondo, z = hacia la cámara, y = arriba. La pared del fondo (mesón, lavaplatos, cocina y horno) está en z = room[1]. Lo leen tools/build_cocina.py (Blender) y src/mision6.js.",
+
+  "room": [-4.6, -3.2, 4.6, 3.6],
+  "height": 3.4,
+  "counterH": 0.7,
+  "counterD": 0.75,
+
+  "fridge": [-4.55, -3.15, -3.45, -2.35],
+  "sink": [-1.9, -0.9],
+  "stove": [1.0, 2.2],
+  "oven": [1.05, 2.15, 0.1, 0.56],
+  "window": [-2.3, -0.5, 1.35, 2.55],
+  "island": [-1.5, -0.55, 1.5, 0.45],
+  "stools": [[-0.9, 1.05], [0.0, 1.05], [0.9, 1.05]],
+  "table": [3.2, 1.6, 0.6],
+
+  "pie": [0.0, 0.12],
+  "ovenPie": [1.6, -2.78, 0.25],
+
+  "spots": {
+    "isla_j": [-0.45, -0.92, 0],
+    "isla_i": [0.45, -0.92, 0],
+    "meson": [-0.55, -2.08, 2.39],
+    "meson_j": [-1.7, -1.5, 2.1],
+    "horno_j": [0.7, -1.75, 3.14159],
+    "horno_i": [2.5, -1.75, 3.14159]
+  },
+  "bowls": { "j": [-0.45, -0.36], "i": [0.45, -0.36] },
+  "lemons": [0.25, -2.78],
+  "jug": [-0.22, -2.6]
+}

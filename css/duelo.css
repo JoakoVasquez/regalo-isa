@@ -1,0 +1,74 @@
+/* ───────────── Minijuego: duelo en la cocina (reutiliza las barras .c6-* del capítulo 6) ───────────── */
+#duLayer { position: fixed; inset: 0; z-index: 14; pointer-events: none; font-family: var(--font); filter: blur(var(--soft, 0px)); }
+#duLayer .hidden { display: none !important; }
+
+/* Marcador (arriba al centro) */
+#duScore {
+  position: absolute; left: 50%; top: 2.6vmin; transform: translateX(-50%);
+  display: flex; align-items: center; gap: 2.4vmin; padding: 1.2vmin 3vmin; border-radius: 99vmin;
+  background: #fffdf3; color: #4a4036; border: .45vmin solid #f2cf3a; box-shadow: 0 .6vmin 1.4vmin rgba(0,0,0,.2);
+  font-weight: 900; white-space: nowrap;
+}
+.du-side { display: flex; align-items: center; gap: 1.4vmin; font-size: 3vmin; }
+.du-side.yo b { color: #e2463a; }
+.du-side.isa b { color: #ef6aa7; }
+.du-pts { display: flex; gap: .7vmin; }
+.du-pts i { width: 2.6vmin; height: 2.6vmin; border-radius: 50%; background: #efe7d2; border: .3vmin solid #e2d6b4; }
+.du-side.yo .du-pts i.on { background: #e2463a; border-color: #c9352a; }
+.du-side.isa .du-pts i.on { background: #ef6aa7; border-color: #e0508f; }
+.du-pts i.pop { animation: duDot .5s cubic-bezier(.3,1.6,.6,1); }
+@keyframes duDot { from { transform: scale(2.4); } }
+.du-mid { text-align: center; font-size: 2.6vmin; color: #c99a10; line-height: 1.05; }
+.du-mid small { display: block; font-size: 1.5vmin; letter-spacing: .08em; text-transform: uppercase; color: #a8956b; }
+
+/* Cartel de la prueba y cuenta regresiva */
+#duBanner {
+  position: absolute; left: 50%; top: 38%; transform: translate(-50%, -50%);
+  padding: 2.2vmin 6vmin; border-radius: 99vmin; white-space: nowrap; text-align: center;
+  font-size: 5.4vmin; font-weight: 900; color: #fff;
+  background: linear-gradient(90deg, #e2463a, #ef6aa7);
+  border: .6vmin solid #fff; box-shadow: 0 .8vmin 2vmin rgba(0,0,0,.3);
+}
+#duBanner small { display: block; font-size: 2.4vmin; opacity: .9; margin-bottom: .3vmin; }
+#duBanner.title { animation: c6Turn 1.6s both; }
+#duBanner.count { min-width: 9vmin; padding: 1vmin 4vmin; font-size: 9vmin; background: linear-gradient(#ffd85c, #f2a81a); animation: duCount .45s cubic-bezier(.3,1.6,.6,1) both; }
+#duBanner.count.go { background: linear-gradient(#7ed67e, #3f9a3f); }
+@keyframes duCount { from { transform: translate(-50%, -50%) scale(.3); opacity: 0; } }
+
+/* Panel de la prueba (abajo) */
+#duPanel {
+  position: absolute; left: 50%; bottom: 9vh; transform: translateX(-50%);
+  width: min(84vw, 104vmin); padding: 1.8vmin 3vmin 2vmin; border-radius: 3.4vmin;
+  background: rgba(255,253,243,.95); color: #4a4036;
+  border: .45vmin solid #f2cf3a; box-shadow: 0 .6vmin 1.4vmin rgba(0,0,0,.22);
+}
+.du-title { font-size: 3vmin; font-weight: 900; margin-bottom: 1.2vmin; }
+.du-body { display: flex; align-items: center; gap: 3vmin; min-height: 12vmin; }
+.du-ctl { flex: none; display: flex; align-items: center; justify-content: center; gap: 1.6vmin; min-width: 16vmin; }
+.du-ctl .c6-gauge { width: 34vmin; flex: none; }
+.du-big { font-size: 7vmin; line-height: 1; }
+.du-lanes { flex: 1; display: flex; flex-direction: column; gap: 1.2vmin; }
+.du-lane { display: flex; align-items: center; gap: 1.6vmin; }
+.du-lane b { width: 9vmin; text-align: right; font-size: 2.4vmin; font-weight: 900; }
+.du-lane.isa b { color: #ef6aa7; }
+.du-lane.yo b { color: #e2463a; }
+.du-lane.isa .c6-bar > i { background: linear-gradient(to right, #ffb3d4, #ef6aa7); }
+.du-lane.yo .c6-bar > i { background: linear-gradient(to right, #f59a91, #e2463a); }
+
+/* Reflejos: sin barras, solo el aviso */
+#duPanel.solo .du-lanes { display: none; }
+#duPanel.solo .du-ctl { flex: 1; }
+.du-wait { padding: 1.6vmin 5vmin; border-radius: 99vmin; font-size: 4.6vmin; font-weight: 900; color: #a8956b; background: #efe7d2; }
+.du-wait.go { color: #fff; background: #3f9a3f; animation: c6Pop .2s cubic-bezier(.3,1.6,.6,1); }
+.du-wait.foul { color: #fff; background: #e0503c; animation: c5Shake .3s; }
+
+/* Burbuja sobre un Mii */
+#duSay {
+  position: absolute; transform: translate(-50%, -100%);
+  padding: 1.2vmin 2.4vmin; border-radius: 2.4vmin; white-space: nowrap;
+  background: #fff; color: #4a4036; font-size: 2.6vmin; font-weight: 900;
+  box-shadow: 0 .4vmin 1vmin rgba(0,0,0,.25);
+}
+#duSay.pop { animation: bubblePop .25s backwards; }
+#duSay.bad { color: #e0503c; }
+#duSay.good { color: #3f9a3f; }

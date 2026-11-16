@@ -1,0 +1,41 @@
+/* ───────────── Minijuegos arcade (trencito, lluvia de limones): marcador, vidas y carteles ───────────── */
+.ar-layer { position: fixed; inset: 0; z-index: 14; pointer-events: none; font-family: var(--font); filter: blur(var(--soft, 0px)); }
+.ar-layer .hidden { display: none !important; }
+
+.ar-hud { position: absolute; left: 0; right: 0; top: 2.6vmin; display: flex; align-items: flex-start; justify-content: space-between; padding: 0 3vmin; }
+.ar-box {
+  min-width: 15vmin; padding: 1vmin 2.6vmin 1.2vmin; border-radius: 2.6vmin; text-align: center;
+  background: #fffdf3; color: #4a4036; border: .45vmin solid #f2cf3a; box-shadow: 0 .6vmin 1.4vmin rgba(0,0,0,.25);
+}
+.ar-box small { display: block; font-size: 1.6vmin; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; color: #a8956b; }
+.ar-box b { display: block; font-size: 5vmin; font-weight: 900; line-height: 1.05; }
+.ar-score b { color: #e0508f; }
+.ar-score b.pop { animation: arPop .3s cubic-bezier(.3,1.6,.6,1); }
+.ar-best { opacity: .92; }
+.ar-best b { font-size: 3.6vmin; color: #c99a10; }
+@keyframes arPop { from { transform: scale(1.6); } }
+
+.ar-lives { display: flex; gap: .8vmin; padding: 1vmin 2.4vmin; border-radius: 99vmin; background: rgba(255,253,243,.92); box-shadow: 0 .6vmin 1.4vmin rgba(0,0,0,.2); }
+.ar-lives:empty { display: none; }
+.ar-lives i { font-style: normal; font-size: 4.4vmin; line-height: 1; color: #d9d2c0; }
+.ar-lives i.on { color: #ef4f7f; }
+.ar-lives.hit { animation: c5Shake .35s; }
+
+.ar-banner {
+  position: absolute; left: 50%; top: 40%; transform: translate(-50%, -50%);
+  padding: 2.2vmin 6vmin; border-radius: 5vmin; text-align: center; white-space: nowrap;
+  font-size: 5.6vmin; font-weight: 900; color: #fff;
+  background: linear-gradient(90deg, #8a4cff, #ef6aa7);
+  border: .6vmin solid #fff; box-shadow: 0 .8vmin 2vmin rgba(0,0,0,.35);
+}
+.ar-banner small { display: block; font-size: 2.6vmin; font-weight: 800; opacity: .95; margin-top: .6vmin; }
+.ar-banner.title { animation: arTitle 2.2s both; }
+.ar-banner.count { min-width: 9vmin; padding: 1vmin 4vmin; border-radius: 99vmin; font-size: 9vmin; background: linear-gradient(#ffd85c, #f2a81a); animation: arCount .45s cubic-bezier(.3,1.6,.6,1) both; }
+.ar-banner.count.go { background: linear-gradient(#7ed67e, #3f9a3f); }
+@keyframes arTitle {
+  0% { transform: translate(-50%, -50%) scale(.3); opacity: 0; }
+  10% { transform: translate(-50%, -50%) scale(1.06); opacity: 1; }
+  16%, 88% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(.9); opacity: 0; }
+}
+@keyframes arCount { from { transform: translate(-50%, -50%) scale(.3); opacity: 0; } }

@@ -223,6 +223,83 @@ function poseCheer(u) {
   return p;
 }
 
+// Capítulo 6 · cocinando. Revolver: la mano izquierda sujeta el bol y la derecha da vueltas.
+function poseStir(u) {
+  const c = Math.cos(u * TAU), s = Math.sin(u * TAU);
+  const p = poseIdle(u);
+  p.chest = { rot: E(0.14, 0.04 * s, 0.02 * c) };
+  p.head = { rot: E(0.22, 0.03 * c, 0) };
+  p.arm_l1 = { dir: V(0.3, -0.55, 0.85) };
+  p.arm_l2 = { dir: V(-0.55, -0.2, 0.8) };
+  p.arm_r1 = { dir: V(-0.22 + 0.1 * c, -0.45, 0.9) };
+  p.arm_r2 = { dir: V(0.25 + 0.3 * c, -0.6, 0.75 + 0.3 * s) };
+  return p;
+}
+// Machacar / amasar: las dos manos suben y bajan juntas (con el uslero o exprimiendo)
+function poseMash(u) {
+  const a = Math.abs(Math.sin(u * TAU));
+  const p = poseIdle(u);
+  p.root = V(0, -0.02 * (1 - a), 0);
+  p.chest = { rot: E(0.18 - 0.06 * a, 0, 0) };
+  p.head = { rot: E(0.2, 0, 0) };
+  for (const [k, s] of [['l', 1], ['r', -1]]) {
+    p['arm_' + k + '1'] = { dir: V(s * 0.2, -0.5 + 0.3 * a, 0.9) };
+    p['arm_' + k + '2'] = { dir: V(-s * 0.35, -0.55 + 0.6 * a, 0.8) };
+  }
+  return p;
+}
+// Comiendo: la mano derecha va del plato a la boca
+function poseEat(u) {
+  const m = Math.max(0, Math.sin(u * TAU));
+  const p = poseIdle(u);
+  p.head = { rot: E(0.05 - 0.08 * m, 0, 0.04 * m) };
+  p.arm_l1 = { dir: V(0.3, -0.8, 0.6) };
+  p.arm_l2 = { dir: V(-0.5, -0.25, 0.85) };
+  p.arm_r1 = { dir: V(-0.3, -0.7 + 0.45 * m, 0.7) };
+  p.arm_r2 = { dir: V(0.2 + 0.25 * m, -0.4 + 1.4 * m, 0.8 - 0.3 * m) };
+  return p;
+}
+
+// Capítulo 7 · picnic. Sentado en el suelo con las piernas estiradas y las manos en las rodillas.
+function poseSitFloor(u, rig) {
+  const b = Math.sin(u * TAU);
+  const p = { root: V(0, -2 * rig.thighLen + 0.004 * b, 0) };
+  p.chest = { rot: E(0.05 + 0.012 * b, 0, 0) };
+  p.head = { rot: E(-0.03 - 0.012 * b, 0.05 * Math.sin(u * TAU + 0.8), 0) };
+  for (const [k, s] of [['l', 1], ['r', -1]]) {
+    p['foot_' + k + '1'] = { dir: V(s * 0.3, 0.3, 1) };      // rodillas un poco arriba
+    p['foot_' + k + '2'] = { dir: V(-s * 0.08, -0.42, 1) };
+    p['arm_' + k + '1'] = { dir: V(s * 0.42, -0.9, 0.45) };
+    p['arm_' + k + '2'] = { dir: V(-s * 0.05, -0.55, 1) };
+  }
+  return p;
+}
+// Pintando sentado: la derecha da pinceladas hacia adelante, la izquierda sostiene la paleta.
+function posePaint(u, rig) {
+  const c = Math.cos(u * TAU), s = Math.sin(u * TAU);
+  const p = poseSitFloor(u, rig);
+  p.chest = { rot: E(0.1, -0.12 + 0.03 * s, 0) };
+  p.head = { rot: E(-0.02, 0.1 + 0.04 * s, 0.05 * c) };
+  p.arm_r1 = { dir: V(-0.35, -0.3 + 0.1 * s, 1) };
+  p.arm_r2 = { dir: V(0.05 + 0.22 * c, 0.3 + 0.25 * s, 1) };
+  p.arm_l1 = { dir: V(0.5, -0.85, 0.4) };
+  p.arm_l2 = { dir: V(-0.35, -0.05, 1) };
+  return p;
+}
+// Sentado en el suelo celebrando con los brazos arriba
+function poseSitCheer(u, rig) {
+  const j = Math.abs(Math.sin(u * TAU));
+  const p = poseSitFloor(u, rig);
+  p.root = V(0, -2 * rig.thighLen + 0.03 * j, 0);
+  p.chest = { rot: E(-0.06, 0, 0.05 * Math.sin(u * TAU)) };
+  p.head = { rot: E(-0.14, 0, 0) };
+  for (const [k, s] of [['l', 1], ['r', -1]]) {
+    p['arm_' + k + '1'] = { dir: V(s * 0.55, 1, 0.15) };
+    p['arm_' + k + '2'] = { dir: V(s * 0.3, 1, 0.1 - 0.2 * j) };
+  }
+  return p;
+}
+
 // ───────────── "Horneado" de poses a AnimationClips ─────────────
 let sharedClips = null;
 
@@ -288,6 +365,12 @@ function bakeClips(root, bones) {
     sneak: bake('sneak', 0.62, 28, poseSneak),
     offer: bake('offer', 2.4, 24, poseOffer),
     cheer: bake('cheer', 0.6, 20, poseCheer),
+    stir: bake('stir', 0.8, 24, poseStir),
+    mash: bake('mash', 0.5, 20, poseMash),
+    eat: bake('eat', 1.6, 24, poseEat),
+    sitfloor: bake('sitfloor', 3.4, 24, poseSitFloor),
+    paint: bake('paint', 1.5, 24, posePaint),
+    sitcheer: bake('sitcheer', 0.6, 20, poseSitCheer),
   };
 }
 

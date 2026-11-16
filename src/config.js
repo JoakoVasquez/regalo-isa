@@ -22,10 +22,32 @@ export const CONFIG = {
     { id: 'm3', title: 'Capítulo 3', subtitle: 'La pista de baile' },
     { id: 'm4', title: 'Capítulo 4', subtitle: 'Bromita' },
     { id: 'm5', title: 'Capítulo 5', subtitle: 'Los puentes' },
-    { id: 'sandbox', slot: 11, title: 'Zona de Pruebas', subtitle: 'Miis, animaciones y diálogos' },
+    { id: 'm6', title: 'Capítulo 6', subtitle: 'El pie de limón' },
+    { id: 'm7', title: 'Capítulo 7', subtitle: 'El retrato' },
+    // needsEggs: además del capítulo anterior, pide todos los corazones escondidos.
+    // givesLetter: al completarlo se abre la carta del menú.
+    { id: 'm8', title: 'Capítulo 8', subtitle: '¿Quién quiere ser millonaria?', needsEggs: true, givesLetter: true },
+    // extra: minijuego de la última fila; se abre al completar toda la historia.
+    // record: nombre del récord que se muestra al abrir la casilla.
+    { id: 'duelo', slot: 8, title: 'Duelo en la cocina', subtitle: 'Isa contra Joaco, a 3 puntos', extra: true, record: 'Mejor racha' },
+    { id: 'trencito', slot: 9, title: 'El trencito', subtitle: 'Suma gente a la fila sin chocar', extra: true, record: 'Trencito más largo' },
+    { id: 'limones', slot: 10, title: 'Lluvia de limones', subtitle: 'Atrapa limones, esquiva piñas', extra: true, record: 'Mejor puntaje' },
   ],
 
-  // Botón de la carta en el menú
+  // Corazones escondidos (easter eggs), uno por capítulo. pos = [x, y, z] en las coordenadas de ese
+  // escenario; size = tamaño; player = Mii que también lo recoge si pasa caminando por encima.
+  // Siempre se pueden recoger con un clic.
+  eggs: {
+    m1: { pos: [-15.5, 1.1, -21.3], size: 0.6, player: 'isa' },  // junto a la escultura del pasto, lejos del camino
+    m2: { pos: [8.9, 3.75, 26.3], size: 0.5, player: 'yo' },     // al fondo de la sala, arriba a la derecha
+    m3: { pos: [-16.6, 1.1, 30.5], size: 0.6, player: 'yo' },    // rincón del fondo, del lado de la barra
+    m4: { pos: [1.25, 1.95, -3.2], size: 0.3 },                  // en la pared de la pieza, a la derecha del celular
+    m5: { pos: [9.7, 5.1, -1.2], size: 0.55, player: 'yo' },     // punta del puente de la derecha
+    m6: { pos: [-2.0, 2.05, -3.05], size: 0.16 },                // colgando en la ventana de la cocina
+    m7: { pos: [5.2, 0.95, -7.6], size: 0.4 },                   // en la banca junto a la laguna
+  },
+
+  // La carta: se abre al ganar el capítulo 8 y queda en el botón del menú
   letter: {
     title: 'Para Isa',
     body: 'Aquí va a ir un mensaje.\n(Se edita en src/config.js)',

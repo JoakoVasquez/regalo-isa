@@ -67,6 +67,42 @@ const SONGS = {
       [77, 0, 81, 0, 79, 0, 77, 0], [76, 0, 74, 0, 72, 0, 0, 0],
     ],
   },
+  // Capítulo 6: cocinando el pie de limón, tarde tranquila y alegre
+  cocina: {
+    bpm: 108, style: 'bounce',
+    chords: [[65, 69, 72, 76], [62, 65, 69, 72], [70, 74, 77, 81], [72, 76, 79, 82],
+             [65, 69, 72, 76], [62, 65, 69, 72], [70, 74, 77, 79], [72, 76, 79, 82]],
+    melody: [
+      [81, 0, 77, 79, 81, 0, 84, 0], [81, 0, 77, 0, 74, 0, 0, 77],
+      [79, 0, 77, 74, 0, 77, 82, 0], [79, 0, 76, 0, 72, 0, 0, 0],
+      [81, 0, 77, 79, 81, 0, 84, 0], [86, 0, 84, 0, 81, 0, 0, 77],
+      [79, 0, 82, 0, 81, 0, 79, 77], [76, 0, 79, 0, 77, 0, 0, 0],
+    ],
+  },
+  // Capítulo 7: picnic en el parque, pintando al sol
+  parque: {
+    bpm: 92, style: 'bounce',
+    chords: [[67, 71, 74, 78], [64, 67, 71, 74], [60, 64, 67, 71], [62, 66, 69, 72],
+             [67, 71, 74, 78], [64, 67, 71, 74], [60, 64, 69, 72], [62, 66, 69, 74]],
+    melody: [
+      [83, 0, 79, 0, 81, 83, 0, 86], [83, 0, 79, 0, 76, 0, 0, 0],
+      [84, 0, 83, 79, 0, 76, 79, 0], [81, 0, 78, 0, 74, 0, 0, 78],
+      [83, 0, 79, 0, 81, 83, 0, 86], [88, 0, 86, 0, 83, 0, 0, 79],
+      [84, 0, 81, 0, 79, 0, 76, 0], [78, 0, 81, 0, 79, 0, 0, 0],
+    ],
+  },
+  // Capítulo 8: el concurso, con algo de suspenso
+  concurso: {
+    bpm: 84, style: 'calm',
+    chords: [[57, 60, 64, 69], [53, 57, 60, 65], [55, 59, 62, 67], [52, 56, 59, 64],
+             [57, 60, 64, 69], [53, 57, 60, 65], [50, 53, 57, 62], [52, 56, 59, 62]],
+    melody: [
+      [69, 0, 72, 0, 76, 0, 72, 0], [69, 0, 72, 0, 77, 0, 0, 76],
+      [67, 0, 71, 0, 74, 0, 71, 0], [68, 0, 71, 0, 76, 0, 0, 0],
+      [69, 0, 72, 0, 76, 0, 81, 0], [77, 0, 76, 0, 72, 0, 0, 69],
+      [65, 0, 69, 0, 74, 0, 72, 0], [71, 0, 68, 0, 64, 0, 0, 0],
+    ],
+  },
   plaza: {
     bpm: 112, style: 'bounce',
     chords: [[60, 64, 67, 71], [57, 60, 64, 67], [65, 69, 72, 76], [67, 71, 74, 77],
@@ -259,6 +295,45 @@ export class AudioSys {
       case 'whoosh': // el botón "No" se arranca
         this._noise({ dur: 0.22, vol: 0.09, freq: 900, f2: 4000, q: 1.2 });
         this._tone({ f: 600, f2: 1400, dur: 0.12, vol: 0.06, type: 'triangle' });
+        break;
+      case 'crunch': // galletas molidas
+        this._noise({ dur: 0.09, vol: 0.16, freq: 1800 + Math.random() * 900, q: 0.9 });
+        this._noise({ t: 0.04, dur: 0.07, vol: 0.1, freq: 3200, q: 1.4 });
+        this._tone({ f: 140, f2: 80, dur: 0.06, vol: 0.08 });
+        break;
+      case 'squeeze': // limón estrujado
+        this._noise({ dur: 0.16, vol: 0.08, freq: 1200, f2: 600, q: 2.5 });
+        this._tone({ f: 700 + Math.random() * 120, f2: 380, dur: 0.1, vol: 0.05, type: 'triangle' });
+        break;
+      case 'drip': // gota de jugo / ingrediente que cae
+        this._tone({ f: 900, f2: 1700, dur: 0.07, vol: 0.1 });
+        break;
+      case 'splash': // se sale de la fuente
+        this._noise({ dur: 0.3, vol: 0.16, freq: 900, f2: 300, q: 0.7 });
+        this._tone({ f: 330, f2: 160, dur: 0.22, vol: 0.1, type: 'triangle' });
+        break;
+      case 'whisk': // batidor contra el bol
+        this._noise({ dur: 0.05, vol: 0.07, freq: 4200, q: 3 });
+        this._tone({ f: 2400, dur: 0.03, vol: 0.025, type: 'triangle' });
+        break;
+      case 'ding': // timer del horno
+        this._bell(96, 0, 0.18, 1.2, 0.6); this._bell(96, 0.35, 0.14, 1.4, 0.6);
+        break;
+      case 'stamp': // un rasgo queda pintado en el lienzo
+        this._noise({ dur: 0.12, vol: 0.14, freq: 700, f2: 250, q: 0.8 });
+        this._tone({ f: 300, f2: 150, dur: 0.1, vol: 0.16 });
+        this._tone({ f: 1200, f2: 1700, t: 0.05, dur: 0.08, vol: 0.05, type: 'triangle' });
+        break;
+      case 'brush': // pincelada
+        this._noise({ dur: 0.2, vol: 0.06, freq: 2600, f2: 1200, q: 1.5 });
+        break;
+      case 'canvas': // el lienzo se levanta y tapa la vista
+        this._noise({ dur: 0.35, vol: 0.1, freq: 400, f2: 1800, q: 0.9 });
+        this._tone({ f: 220, f2: 330, dur: 0.25, vol: 0.08, type: 'triangle' });
+        this._tone({ f: 160, f2: 110, t: 0.3, dur: 0.12, vol: 0.14 });
+        break;
+      case 'tick':
+        this._tone({ f: 2200, dur: 0.02, vol: 0.04, type: 'square' });
         break;
       case 'yay':
         [76, 79, 84, 88, 91, 96].forEach((n, i) => this._bell(n, i * 0.06, 0.12, 0.6, 0.6));

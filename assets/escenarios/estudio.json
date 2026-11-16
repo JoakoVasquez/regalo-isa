@@ -1,0 +1,22 @@
+{
+  "_info": "Estudio de televisión del Capítulo 8 (el concurso). Coordenadas del juego: x = de izquierda a derecha mirando desde la cámara, z = hacia la cámara, y = arriba. El público (la cámara) está en +z; el telón de fondo, en -z. Lo leen tools/build_estudio.py (Blender) y src/mision8.js. La pantalla gigante y los haces de luz se arman en three.js porque cambian durante el capítulo.",
+
+  "stageR": 3.2,
+  "stageH": 0.2,
+
+  "spots": {
+    "joaco": [-1.05, 0.25, 0.45],
+    "isa": [1.05, 0.25, -0.45]
+  },
+  "podium": { "dist": 0.5, "w": 0.66, "d": 0.36, "h": 0.6 },
+
+  "backR": 5.2,
+  "backH": 4.4,
+  "backArc": 72,
+  "backPanels": 11,
+
+  "screen": [0, 3.0, -4.2, 3.3, 1.86],
+  "towers": [[-4.1, -1.6], [4.1, -1.6]],
+  "trussY": 4.3,
+  "lamps": [[-3.0, -0.6], [-1.5, -0.9], [0, -1.0], [1.5, -0.9], [3.0, -0.6]]
+}

@@ -1,0 +1,142 @@
+/* ───────────── Capítulo 7: el retrato ───────────── */
+#c7Layer { position: fixed; inset: 0; z-index: 14; pointer-events: none; font-family: var(--font); filter: blur(var(--soft, 0px)); overflow: hidden; }
+#c7Layer .hidden { display: none !important; }
+
+/* mientras se pinta, el parque queda desenfocado detrás del lienzo */
+#game { transition: filter .5s; }
+#game.c7-blur { filter: blur(2.6vmin) brightness(1.05) saturate(1.1); }
+
+/* 1 · Mirarla: cartel arriba con el tiempo */
+#c7Look {
+  position: absolute; left: 50%; top: 3vmin; transform: translateX(-50%);
+  padding: 1.6vmin 4vmin 2vmin; border-radius: 3vmin; text-align: center; white-space: nowrap;
+  background: rgba(255,253,243,.95); color: #4a4036;
+  border: .45vmin solid #ef6aa7; box-shadow: 0 .6vmin 1.4vmin rgba(0,0,0,.22);
+  animation: c7Drop .4s cubic-bezier(.3,1.5,.6,1);
+}
+#c7Look h3 { margin: 0; font-size: 3.6vmin; font-weight: 900; color: #e0508f; }
+#c7Look p { margin: .4vmin 0 1.2vmin; font-size: 2.2vmin; font-weight: 800; }
+#c7Look p b { color: #e0508f; }
+.c7-clock { height: 1.6vmin; border-radius: 99vmin; background: #efe7d2; overflow: hidden; }
+.c7-clock i { display: block; height: 100%; width: 100%; background: linear-gradient(to right, #ff8fc0, #ffc34d); }
+#c7Look.low .c7-clock i { background: #e0503c; animation: c7Blink .4s steps(2) infinite; }
+@keyframes c7Blink { 50% { opacity: .5; } }
+@keyframes c7Drop { from { transform: translate(-50%, -140%); } }
+#c7Skip {
+  position: absolute; left: 50%; bottom: 9vh; transform: translateX(-50%);
+  padding: 1vmin 3vmin; border-radius: 99vmin; white-space: nowrap;
+  background: rgba(255,255,255,.9); color: #4a4036; font-size: 2.4vmin; font-weight: 900;
+  box-shadow: 0 .4vmin 1vmin rgba(0,0,0,.2);
+}
+
+/* Burbuja de la Isa mientras posa */
+#c7Say {
+  position: absolute; transform: translate(0, -50%);
+  padding: 1.2vmin 2.6vmin; border-radius: 2.4vmin; white-space: nowrap;
+  background: #fff; color: #e0508f; font-size: 2.8vmin; font-weight: 900;
+  box-shadow: 0 .4vmin 1vmin rgba(0,0,0,.25);
+}
+#c7Say.pop { animation: c7SayPop .25s backwards; }
+@keyframes c7SayPop { from { transform: translate(0, -50%) scale(.6); opacity: 0; } }
+
+/* 2 · El lienzo: sube desde abajo y tapa la vista */
+#c7Easel {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 4vmin;
+  padding-bottom: 5vh;
+  transform: translateY(112%); transition: transform .65s cubic-bezier(.25,.9,.3,1.08);
+}
+#c7Easel.up { transform: none; }
+.c7-board {
+  position: relative; height: 82vh; aspect-ratio: 700 / 800; padding: 1.5vmin;
+  border-radius: 1vmin; background: linear-gradient(135deg, #d9ab72, #b98654);
+  box-shadow: 0 1.2vmin 3vmin rgba(40,30,10,.45), inset 0 0 0 .3vmin rgba(255,255,255,.25);
+}
+.c7-board canvas { display: block; width: 100%; height: 100%; border-radius: .4vmin; box-shadow: inset 0 0 0 .2vmin rgba(0,0,0,.1); }
+/* patas del caballete asomando por abajo */
+.c7-board::before, .c7-board::after {
+  content: ''; position: absolute; top: 96%; width: 3vmin; height: 30vh; z-index: -1;
+  background: linear-gradient(90deg, #c99a64, #a8774a); border-radius: .6vmin;
+}
+.c7-board::before { left: 12%; transform: rotate(7deg); }
+.c7-board::after { right: 12%; transform: rotate(-7deg); }
+
+.c7-side {
+  position: relative; width: 36vmin; padding: 2.2vmin 2.4vmin; border-radius: 2.8vmin;
+  background: rgba(255,253,243,.96); color: #4a4036;
+  border: .45vmin solid #7fc8e8; box-shadow: 0 .6vmin 1.4vmin rgba(0,0,0,.22);
+}
+.c7-side h3 { margin: 0 0 1.2vmin; font-size: 2.8vmin; font-weight: 900; color: #3f8fcf; }
+.c7-side ol { list-style: none; margin: 0; padding: 0; }
+.c7-side li {
+  display: flex; align-items: center; gap: 1.2vmin; padding: .6vmin .9vmin; border-radius: 1.4vmin;
+  font-size: 2.2vmin; font-weight: 800; color: #a69c8e;
+}
+.c7-side li img { flex: none; width: 6vmin; height: 3.4vmin; object-fit: contain; opacity: .45; }
+.c7-side li b { margin-left: auto; color: #5bb85b; font-size: 2.4vmin; visibility: hidden; }
+.c7-side li.on { background: #dff1fa; color: #4a4036; }
+.c7-side li.on img { opacity: 1; animation: c7Wobble .5s ease-in-out infinite alternate; }
+.c7-side li.done { color: #6f8a6f; }
+.c7-side li.done img { opacity: .8; }
+.c7-side li.done b { visibility: visible; animation: c7Pop .35s cubic-bezier(.3,1.6,.6,1); }
+@keyframes c7Wobble { from { transform: rotate(-9deg); } to { transform: rotate(9deg); } }
+@keyframes c7Pop { from { transform: scale(.2); } }
+.c7-help { margin-top: 1.6vmin; padding-top: 1.4vmin; border-top: .3vmin dashed #e2d6b4; text-align: center; font-size: 2vmin; font-weight: 800; line-height: 1.9; color: #6d6253; }
+.c7-help b { display: inline-block; min-width: 3vmin; padding: 0 .6vmin; border-radius: .8vmin; background: #fff; border: .25vmin solid #d9cca8; line-height: 1.4; }
+/* lo que piensa Joaco al pintar cada rasgo */
+.c7-think {
+  position: absolute; left: 50%; bottom: 100%; transform: translate(-50%, -1.6vmin);
+  padding: 1.1vmin 2.4vmin; border-radius: 2.4vmin; white-space: nowrap;
+  background: #fff; color: #e2463a; font-size: 2.5vmin; font-weight: 900; font-style: italic;
+  box-shadow: 0 .4vmin 1vmin rgba(0,0,0,.25);
+}
+.c7-think.pop { animation: c7Think .25s backwards; }
+@keyframes c7Think { from { transform: translate(-50%, 0) scale(.6); opacity: 0; } }
+
+/* Cartel grande (¡A pintar de memoria!) */
+#c7Banner {
+  position: absolute; left: 50%; top: 42%; transform: translate(-50%, -50%);
+  padding: 2.2vmin 6vmin; border-radius: 99vmin; white-space: nowrap;
+  font-size: 5.4vmin; font-weight: 900; color: #fff;
+  background: linear-gradient(90deg, #e2463a, #ef6aa7);
+  border: .6vmin solid #fff; box-shadow: 0 .8vmin 2vmin rgba(0,0,0,.3);
+  animation: c7Banner 1.5s both;
+}
+@keyframes c7Banner {
+  0% { transform: translate(-50%, -50%) scale(.3); opacity: 0; }
+  15% { transform: translate(-50%, -50%) scale(1.08); opacity: 1; }
+  25%, 82% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(.9); opacity: 0; }
+}
+
+/* 3 · Tarjeta del final: la Isa de verdad vs. el retrato */
+#c7Card {
+  position: absolute; left: 50%; top: 46%; transform: translate(-50%, -50%);
+  padding: 3vmin 4vmin 2.4vmin; border-radius: 3.4vmin; text-align: center;
+  background: rgba(255,253,243,.97); color: #4a4036;
+  border: .5vmin solid #ef6aa7; box-shadow: 0 1vmin 2.6vmin rgba(0,0,0,.3);
+  animation: c7Card .4s cubic-bezier(.3,1.4,.6,1);
+}
+@keyframes c7Card { from { transform: translate(-50%, -50%) scale(.5); opacity: 0; } }
+.c7-pics { display: flex; gap: 4vmin; justify-content: center; }
+.c7-pics figure { margin: 0; padding: 1.2vmin 1.2vmin 0; background: #fff; border-radius: .8vmin; box-shadow: 0 .5vmin 1.4vmin rgba(0,0,0,.25); }
+.c7-pics figure.real { transform: rotate(-3deg); }
+.c7-pics figure.mine { transform: rotate(2.5deg); }
+.c7-pics img { display: block; height: 44vh; aspect-ratio: 700 / 800; border-radius: .4vmin; }
+.c7-pics figure.real img { background: linear-gradient(#bfe6fb, #d8f2c8); }
+.c7-pics figcaption { padding: 1vmin 0 1.2vmin; font-size: 2.6vmin; font-weight: 900; }
+.c7-score { margin-top: 2vmin; display: flex; align-items: baseline; justify-content: center; gap: 1.6vmin; font-size: 3vmin; font-weight: 900; text-transform: uppercase; letter-spacing: .06em; color: #a8956b; }
+.c7-score b { font-size: 7vmin; letter-spacing: 0; color: #e0508f; min-width: 16vmin; text-align: left; }
+#c7Card.genial .c7-score b { color: #3f9a3f; }
+#c7Card.raro .c7-score b { color: #e0a800; }
+#c7Card.mal .c7-score b { color: #e0503c; }
+.c7-parts { display: flex; gap: 1vmin; justify-content: center; margin-top: .6vmin; }
+.c7-parts span { display: flex; flex-direction: column; align-items: center; gap: .3vmin; width: 9vmin; padding: .8vmin .4vmin; border-radius: 1.4vmin; background: #f3eeda; font-size: 2vmin; font-weight: 900; }
+.c7-parts img { width: 6.4vmin; height: 3.2vmin; object-fit: contain; }
+.c7-parts .good { color: #3f9a3f; background: #e3f4dc; }
+.c7-parts .mid { color: #b88a00; background: #fbf0c4; }
+.c7-parts .bad { color: #e0503c; background: #fbe1dc; }
+.c7-go { margin-top: 1.6vmin; font-size: 2.2vmin; font-weight: 800; color: #6d6253; animation: c7Blink 1s ease-in-out infinite alternate; }
+/* el cuadro de la Isa: una sola foto, grande */
+#c7Card.single .real, #c7Card.single .c7-score, #c7Card.single .c7-parts { display: none; }
+#c7Card.single .mine { transform: rotate(-1.5deg); }
+#c7Card.single .c7-pics img { height: 58vh; }
