@@ -1,0 +1,10 @@
+# Archivos de trabajo de Blender (el juego usa los .glb)
+*.blend
+*.blend1
+
+# Configuración local de Claude Code
+.claude/
+
+# Basura del sistema
+Thumbs.db
+desktop.ini

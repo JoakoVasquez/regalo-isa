@@ -1,0 +1,95 @@
+/* ───────────── Capítulo 5: los puentes ───────────── */
+#c5Layer { position: fixed; inset: 0; z-index: 14; pointer-events: none; font-family: var(--font); filter: blur(var(--soft, 0px)); }
+#c5Layer .hidden { display: none !important; }
+
+/* Sospecha: usa la barra del mareo, pero en rosado */
+#mareo.c5 { border-color: #ef6aa7; }
+#mareo.c5 #mareoLabel { color: #d2437f; }
+#mareo.c5 #mareoBar { background: #fbe6ef; border-color: #f2bfd4; }
+#mareo.c5 #mareoBar i { background: linear-gradient(to right, #ffc2d9, #ef6aa7 60%, #d2306f); }
+
+/* Ícono sobre la Isa */
+#c5Eye {
+  position: absolute; transform: translate(-50%, -100%);
+  min-width: 5.2vmin; height: 5.2vmin; padding: 0 1vmin; border-radius: 99vmin;
+  display: flex; align-items: center; justify-content: center;
+  background: #fff; color: #ef6aa7; font-size: 3.2vmin; font-weight: 900;
+  box-shadow: 0 .4vmin .9vmin rgba(0,0,0,.25);
+}
+#c5Eye.c5-away { opacity: .85; animation: c5Hum 1.6s ease-in-out infinite; }
+#c5Eye.c5-warn { background: #ffd43b; color: #7a4b00; animation: c5Warn .22s ease-in-out infinite alternate; }
+#c5Eye.c5-look { background: #ef4f7d; color: #fff; transform: translate(-50%, -100%) scale(1.15); }
+@keyframes c5Hum { 50% { margin-top: -.8vmin; } }
+@keyframes c5Warn { to { transform: translate(-50%, -100%) scale(1.25) rotate(8deg); } }
+
+/* Fase 2: ritmo del corazón */
+#c5Phrase {
+  position: absolute; left: 50%; top: 9vh; transform: translateX(-50%);
+  max-width: 80vw; padding: 2vmin 4.5vmin; border-radius: 4vmin;
+  background: rgba(255,255,255,.96); color: #3a3f45;
+  font-size: 4.2vmin; font-weight: 900; text-align: center; white-space: nowrap;
+  box-shadow: 0 .6vmin 1.4vmin rgba(0,0,0,.22);
+  border: .45vmin solid #ef6aa7;
+}
+#c5Phrase span { display: inline-block; }
+#c5Phrase .new { animation: c5Word .35s cubic-bezier(.3,1.6,.6,1); color: #e8496b; }
+#c5Phrase .c5-st { color: #a3aab2; font-style: italic; animation: c5Shake .3s; }
+#c5Phrase .c5-dots { color: #c1c7cd; }
+@keyframes c5Word { from { transform: scale(.4) translateY(1vmin); opacity: 0; } }
+@keyframes c5Shake { 25% { transform: translateX(-1vmin); } 75% { transform: translateX(1vmin); } }
+
+.c5-bottom { position: absolute; left: 50%; bottom: 11vh; transform: translateX(-50%); width: min(86vw, 120vmin); }
+.c5-track {
+  position: relative; height: 12vmin; border-radius: 99vmin;
+  background: rgba(255,255,255,.88); border: .45vmin solid #f2bfd4;
+  box-shadow: 0 .6vmin 1.2vmin rgba(0,0,0,.18);
+  overflow: hidden;
+}
+.c5-target {
+  position: absolute; left: 10%; top: 50%; width: 10vmin; height: 10vmin; margin: -5vmin 0 0 -5vmin;
+  border-radius: 50%; border: .55vmin dashed #ef6aa7; background: #fff0f6;
+  display: flex; align-items: center; justify-content: center;
+}
+.c5-target b { color: #ef6aa7; font-size: 6vmin; line-height: 1; }
+.c5-target.beat b { animation: c5Beat .28s ease-out; }
+@keyframes c5Beat { 30% { transform: scale(1.35); } }
+.c5-note {
+  position: absolute; top: 50%; transform: translate(-50%, -50%);
+  font-size: 6.4vmin; line-height: 1; color: #e8496b;
+  text-shadow: 0 .3vmin .5vmin rgba(160,30,70,.35);
+}
+.c5-note.ok { color: #ffd43b; animation: c5Ok .35s forwards; }
+.c5-note.bad { color: #b9bfc6; animation: c5Bad .4s forwards; }
+@keyframes c5Ok { to { transform: translate(-50%, -50%) scale(1.9); opacity: 0; } }
+@keyframes c5Bad { to { transform: translate(-50%, 20%) rotate(40deg); opacity: 0; } }
+.c5-nerves {
+  display: flex; align-items: center; gap: 1.6vmin; margin: 0 auto 1.6vmin; width: 60%;
+  font-size: 2vmin; font-weight: 900; color: #d2437f; text-transform: uppercase; letter-spacing: .05em;
+}
+.c5-nerves.hit { animation: mareoHit .5s; }
+.c5-bar { flex: 1; height: 2vmin; border-radius: 99vmin; overflow: hidden; background: #fbe6ef; border: .25vmin solid #f2bfd4; }
+.c5-bar i { display: block; height: 100%; width: 0; background: linear-gradient(to right, #ffc2d9, #ef4f7d); transition: width .2s; }
+.c5-help { margin-top: 1.6vmin; text-align: center; font-size: 2.2vmin; font-weight: 800; color: #fff; text-shadow: 0 .2vmin .6vmin rgba(0,0,0,.55); }
+
+/* Fase 3: ¿sí o no? */
+body.c5-pov #hint { display: none; }
+#c5Answer { position: absolute; inset: 0; pointer-events: auto; }
+.c5-q {
+  position: absolute; left: 50%; top: 4vh; transform: translateX(-50%);
+  padding: 2.2vmin 5vmin; border-radius: 99vmin; white-space: nowrap;
+  background: rgba(255,255,255,.96); border: .5vmin solid #ef6aa7;
+  font-size: 4.6vmin; font-weight: 900; color: #3a3f45;
+  box-shadow: 0 .6vmin 1.4vmin rgba(0,0,0,.22);
+}
+.c5-btn {
+  position: absolute; transform: translate(-50%, -50%);
+  min-width: 18vmin; padding: 2vmin 4vmin; border-radius: 99vmin; border: .5vmin solid #fff;
+  font: 900 4vmin var(--font); color: #fff; cursor: none;
+  box-shadow: 0 .6vmin 1.2vmin rgba(0,0,0,.25);
+  transition: left .18s cubic-bezier(.3,1.4,.6,1), top .18s cubic-bezier(.3,1.4,.6,1), transform .25s;
+}
+.c5-yes { left: 36%; top: 74%; background: linear-gradient(#ff8fb4, #e8496b); transform: translate(-50%, -50%) scale(var(--grow, 1)); }
+.c5-no { background: linear-gradient(#b6bdc5, #8b939c); white-space: nowrap; }
+.c5-no.turned { background: linear-gradient(#ff8fb4, #e8496b); }
+.c5-btn.sel { border-color: #ffd43b; box-shadow: 0 0 0 .6vmin rgba(255,212,59,.6), 0 .6vmin 1.2vmin rgba(0,0,0,.25); }
+#c5Answer .c5-help { position: absolute; left: 0; right: 0; bottom: 3.5vh; }

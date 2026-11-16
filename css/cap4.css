@@ -1,0 +1,232 @@
+/* ───────────── Capítulo 4: el celular de la Isa ───────────── */
+/* la pieza 3D queda detrás, desenfocada */
+body.cap4 #game { filter: blur(1.1vmin) brightness(.8) saturate(1.1); transform: scale(1.06); }
+#phoneLayer {
+  position: fixed; inset: 0; z-index: 18; pointer-events: none;
+  filter: blur(var(--soft, 0px));
+  font-family: -apple-system, 'Segoe UI', Roboto, var(--font);
+  color: #fff;
+}
+#phoneLayer .ico { width: 3.3vh; height: 3.3vh; fill: none; stroke: #fff; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+#phoneLayer .sp { flex: 1; }
+#phoneLayer .av {
+  display: inline-flex; align-items: center; justify-content: center; flex: none;
+  width: 4vh; height: 4vh; border-radius: 50%; font-weight: 800; font-size: 1.9vh; color: #fff;
+}
+#phoneLayer .u-av { display: inline-block; flex: none; width: 3.4vh; height: 3.4vh; border-radius: 50%; background-size: cover; background-position: center; border: .15vh solid #fff; }
+
+.ph-wrap {
+  position: absolute; left: 50%; top: 50%;
+  width: 46vh; height: 97vh;
+  transform: translate(-50%, -47%) rotate(-3deg);
+}
+#phoneLayer.falling .ph-wrap { animation: phoneFall .55s cubic-bezier(.5,0,.9,.4) forwards; }
+@keyframes phoneFall {
+  0% { transform: translate(-50%, -47%) rotate(-3deg); }
+  25% { transform: translate(-48%, -52%) rotate(4deg) scale(1.02); }
+  100% { transform: translate(-50%, -50%) rotate(-12deg) scale(3.4); filter: brightness(.2); }
+}
+.phone {
+  position: absolute; inset: 0;
+  border-radius: 6vh; padding: 1.1vh;
+  background: linear-gradient(135deg, #3a3a40, #121214 40%, #26262b);
+  box-shadow: 0 0 0 .3vh #55555c inset, 0 3vh 6vh rgba(0,0,0,.55), 0 0 9vh rgba(140,180,255,.18);
+}
+.notch { position: absolute; left: 50%; top: 2vh; width: 3vh; height: 3vh; margin-left: -1.5vh; border-radius: 50%; background: #050505; box-shadow: 0 0 0 .3vh #1a1a1a; z-index: 9; }
+.screen {
+  position: relative; width: 100%; height: 100%;
+  border-radius: 5vh; overflow: hidden; background: #000;
+}
+.screen .reel { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.reel-fx { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
+.reel-fx.swipe { animation: reelSwipe .9s ease; }
+@keyframes reelSwipe {
+  30% { background: rgba(0,0,0,.9); transform: translateY(-20%); }
+  60% { background: rgba(0,0,0,.6); transform: translateY(8%); }
+}
+.reel-fx.dim { animation: reelDim .9s ease; }
+@keyframes reelDim { 25%, 70% { background: linear-gradient(to top, #262626 55%, rgba(0,0,0,.4) 55%); } }
+
+/* barras de Instagram */
+.ig-status { position: absolute; left: 0; right: 0; top: 0; height: 5vh; display: flex; align-items: center; padding: 0 3.6vh 0 4.4vh; font-size: 1.9vh; z-index: 10; }
+.ig-status b { font-weight: 700; }
+.st-r { margin-left: auto; display: flex; align-items: center; gap: .8vh; }
+.sig { display: flex; align-items: flex-end; gap: .25vh; height: 1.5vh; }
+.sig u { display: block; width: .45vh; background: #fff; border-radius: .2vh; }
+.sig u:nth-child(1) { height: 30%; } .sig u:nth-child(2) { height: 55%; } .sig u:nth-child(3) { height: 80%; } .sig u:nth-child(4) { height: 100%; opacity: .45; }
+.bat { font-style: normal; font-size: 1.25vh; font-weight: 800; color: #000; background: #fff; border-radius: .6vh; padding: .1vh .6vh; }
+.ig-top { position: absolute; left: 0; right: 0; top: 5.4vh; display: flex; align-items: center; gap: 3vh; padding: 0 2.4vh; font-size: 2.6vh; z-index: 2; text-shadow: 0 .2vh .6vh rgba(0,0,0,.4); }
+.ig-side { position: absolute; right: 1.4vh; bottom: 13vh; display: flex; flex-direction: column; align-items: center; gap: 2.2vh; z-index: 2; }
+.sb { display: flex; flex-direction: column; align-items: center; gap: .4vh; font-size: 1.45vh; font-weight: 600; filter: drop-shadow(0 .2vh .4vh rgba(0,0,0,.4)); border-radius: 1.2vh; }
+.sb .ico { width: 3.6vh; height: 3.6vh; }
+.sb-like.liked .ico { fill: #ff3040; stroke: #ff3040; animation: likePop .4s; }
+@keyframes likePop { 40% { transform: scale(1.35); } }
+.sb-audio { width: 3.6vh; height: 3.6vh; border-radius: .8vh; border: .25vh solid #fff; background-size: cover; background-position: center; }
+.ig-user { position: absolute; left: 2.2vh; right: 8vh; bottom: 9.2vh; z-index: 2; font-size: 1.75vh; text-shadow: 0 .2vh .5vh rgba(0,0,0,.5); }
+.u-row { display: flex; align-items: center; gap: 1.2vh; margin-bottom: 1.2vh; }
+#phoneLayer .u-row .u-av { width: 4.2vh; height: 4.2vh; }
+.follow { border: .18vh solid rgba(255,255,255,.9); border-radius: 1vh; padding: .35vh 1.3vh; font-weight: 700; font-size: 1.6vh; }
+.ig-comment { position: absolute; left: 1.6vh; right: 1.6vh; bottom: 2.2vh; height: 5vh; border-radius: 3vh; background: #262626; display: flex; align-items: center; padding: 0 2.4vh; font-size: 1.8vh; color: #d6d6d6; z-index: 2; }
+.heartpop { position: absolute; left: 50%; top: 42%; transform: translate(-50%, -50%) scale(0); z-index: 4; }
+#phoneLayer .heartpop .ico { width: 13vh; height: 13vh; fill: #ff3040; stroke: none; filter: drop-shadow(0 .5vh 1.5vh rgba(0,0,0,.4)); }
+.heartpop.pop { animation: heartPop 1s ease; }
+@keyframes heartPop {
+  0% { transform: translate(-50%, -50%) scale(0) rotate(-12deg); }
+  20% { transform: translate(-50%, -50%) scale(1.15) rotate(-8deg); }
+  30%, 70% { transform: translate(-50%, -50%) scale(1) rotate(-8deg); opacity: 1; }
+  100% { transform: translate(-50%, -90%) scale(.8) rotate(-8deg); opacity: 0; }
+}
+
+/* lo que hay que tocar: brilla y late */
+#phoneLayer .target { animation: target 1s ease-in-out infinite; }
+@keyframes target {
+  0%, 100% { box-shadow: 0 0 0 .3vh rgba(255,255,255,.9), 0 0 2vh .6vh rgba(52,190,237,.9); }
+  50% { box-shadow: 0 0 0 .5vh rgba(255,255,255,.6), 0 0 3.5vh 1.4vh rgba(52,190,237,.6); }
+}
+.sb-share.target { padding: .6vh; margin: -.6vh; }
+#phoneLayer .press { animation: press .3s; }
+@keyframes press { 40% { transform: scale(.82); filter: brightness(1.6); } }
+
+/* menú de compartir */
+.ig-sheet {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 58%; z-index: 6;
+  background: #262626; border-radius: 2.8vh 2.8vh 0 0; padding: 1.2vh 2vh 2vh;
+  transform: translateY(105%); transition: transform .4s cubic-bezier(.2,.9,.3,1);
+  display: flex; flex-direction: column;
+}
+.ig-sheet.open { transform: none; }
+.sh-handle { width: 5vh; height: .55vh; border-radius: 1vh; background: #6b6b6b; margin: 0 auto 1.6vh; }
+.sh-search { display: flex; align-items: center; gap: 1.2vh; height: 4.4vh; border-radius: 1.2vh; background: #363636; padding: 0 1.4vh; font-size: 1.8vh; color: #a8a8a8; }
+#phoneLayer .sh-search .ico { width: 2.4vh; height: 2.4vh; stroke: #a8a8a8; }
+.sh-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.2vh 1vh; margin-top: 2.6vh; }
+.ct { position: relative; display: flex; flex-direction: column; align-items: center; gap: .8vh; padding: .6vh 0; border-radius: 1.6vh; }
+#phoneLayer .ct .av { width: 8vh; height: 8vh; font-size: 3.4vh; }
+.ct small { font-size: 1.5vh; color: #f2f2f2; white-space: nowrap; }
+.ct .ck { position: absolute; top: 6vh; left: 50%; margin-left: 1.8vh; width: 2.8vh; height: 2.8vh; border-radius: 50%; background: #0095f6; border: .3vh solid #262626; font-size: 1.5vh; font-weight: 900; display: flex; align-items: center; justify-content: center; transform: scale(0); transition: transform .15s; }
+.ct.sel .ck { transform: scale(1); }
+#phoneLayer .ct.sel .av { box-shadow: 0 0 0 .3vh #262626, 0 0 0 .6vh #0095f6; }
+.sh-foot { margin-top: auto; display: flex; flex-direction: column; gap: 1.2vh; }
+.sh-msg { font-size: 1.7vh; color: #8e8e8e; padding: 1vh .4vh; border-bottom: .1vh solid #3a3a3a; }
+.sh-send { height: 4.6vh; border-radius: 1.2vh; background: #0095f6; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.9vh; opacity: .35; transition: opacity .2s; }
+.sh-send.on { opacity: 1; }
+
+/* chat con el Joaco */
+.ig-dm {
+  position: absolute; inset: 0; z-index: 7; background: #000;
+  display: flex; flex-direction: column; padding-top: 5vh;
+  transform: translateX(105%); transition: transform .45s cubic-bezier(.2,.9,.3,1);
+}
+.ig-dm.open { transform: none; }
+.dm-head { display: flex; align-items: center; gap: 1.6vh; padding: 1.2vh 2vh; border-bottom: .1vh solid #262626; }
+#phoneLayer .dm-head .av { width: 4.4vh; height: 4.4vh; font-size: 2vh; }
+.dm-name { display: flex; flex-direction: column; font-size: 1.9vh; line-height: 1.2; }
+.dm-name small { font-size: 1.35vh; color: #a8a8a8; }
+#phoneLayer .dm-head .ico { width: 3vh; height: 3vh; }
+.dm-list { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; gap: 1vh; padding: 2vh; }
+.dm-card { align-self: flex-end; width: 58%; border-radius: 2vh; overflow: hidden; background: #262626; }
+.dm-card-top { display: flex; align-items: center; gap: 1vh; padding: 1vh 1.2vh; font-size: 1.5vh; font-weight: 700; }
+#phoneLayer .dm-card-top .u-av { width: 2.8vh; height: 2.8vh; border: none; }
+.dm-card img { display: block; width: 100%; height: 26vh; object-fit: cover; }
+.dm-me { align-self: flex-end; background: linear-gradient(135deg, #7a3cff, #3b6cff); border-radius: 2.4vh; padding: 1.1vh 2vh; font-size: 1.9vh; }
+.dm-me.pop, .dm-typing.pop { animation: msgPop .3s cubic-bezier(.3,1.6,.5,1); }
+@keyframes msgPop { from { transform: scale(.5) translateY(2vh); opacity: 0; } }
+.dm-seen { align-self: flex-end; font-size: 1.3vh; color: #a8a8a8; }
+.dm-typing { align-self: flex-start; display: flex; align-items: center; gap: 1vh; }
+#phoneLayer .dm-typing .av { width: 3.2vh; height: 3.2vh; font-size: 1.5vh; }
+.dm-typing span { display: flex; gap: .6vh; background: #262626; border-radius: 2.4vh; padding: 1.5vh 1.8vh; }
+.dm-typing span i { width: .9vh; height: .9vh; border-radius: 50%; background: #a8a8a8; animation: dots 1.1s infinite; }
+.dm-typing span i:nth-child(2) { animation-delay: .15s; }
+.dm-typing span i:nth-child(3) { animation-delay: .3s; }
+@keyframes dots { 0%, 60%, 100% { transform: none; opacity: .5; } 30% { transform: translateY(-.6vh); opacity: 1; } }
+.dm-input { margin: 0 1.6vh 2.4vh; height: 5.4vh; border-radius: 3vh; background: #262626; display: flex; align-items: center; gap: 1vh; padding: 0 .8vh 0 .7vh; font-size: 1.9vh; }
+.dm-cam { width: 4vh; height: 4vh; border-radius: 50%; background: #0095f6; display: flex; align-items: center; justify-content: center; flex: none; }
+#phoneLayer .dm-cam .ico { width: 2.4vh; height: 2.4vh; }
+.dm-ph { color: #8e8e8e; }
+.dm-input.has .dm-ph, .dm-input:not(.has) .dm-send, .dm-input.has .dm-mic, .dm-input:not(.has) .dm-caret { display: none; }
+.dm-caret { width: .2vh; height: 2.4vh; background: #0095f6; margin-left: -.8vh; animation: caret 1s steps(1) infinite; }
+@keyframes caret { 50% { opacity: 0; } }
+.dm-send { color: #0095f6; font-weight: 700; padding-right: 1.4vh; }
+#phoneLayer .dm-mic { margin-right: 1vh; }
+.toast { position: absolute; left: 50%; bottom: 10vh; transform: translate(-50%, 2vh); opacity: 0; z-index: 8; background: rgba(38,38,38,.95); border-radius: 1.4vh; padding: 1.2vh 3vh; font-size: 1.8vh; font-weight: 600; }
+.toast.show { animation: toast 1.4s ease; }
+@keyframes toast { 15%, 75% { opacity: 1; transform: translate(-50%, 0); } }
+
+/* manos de la Isa sujetando el celular */
+.hand { position: absolute; pointer-events: none; }
+.hand i { position: absolute; display: block; border-radius: 3vh; background: linear-gradient(to right, #e9b493, #f6cfb2 55%, #e4aa88); box-shadow: inset 0 -.6vh 1vh rgba(160,90,60,.35); }
+.hand-r { right: -2.6vh; top: 34%; width: 6vh; height: 40%; }
+.hand-r i { right: 0; width: 5.6vh; height: 6.4vh; }
+.hand-r i:nth-child(1) { top: 0; }
+.hand-r i:nth-child(2) { top: 8vh; }
+.hand-r i:nth-child(3) { top: 16vh; }
+.hand-r i:nth-child(4) { top: 24vh; width: 4.6vh; }
+.hand-l { left: -11vh; bottom: -22vh; width: 22vh; height: 34vh; border-radius: 10vh 10vh 0 0; background: linear-gradient(to right, #e4aa88, #f3c9a9 50%, #e9b493); box-shadow: inset -1vh 1vh 2vh rgba(160,90,60,.3); transform: rotate(14deg); }
+.hand-l .thumb { left: 11vh; top: -9vh; width: 6.4vh; height: 17vh; transform: rotate(28deg); border-radius: 3.2vh 3.2vh 2vh 2vh; }
+.hand-l .thumb::after { content: ''; position: absolute; left: 1.2vh; right: 1.2vh; top: .8vh; height: 4.4vh; border-radius: 2vh 2vh 1.2vh 1.2vh; background: rgba(255,235,225,.75); }
+
+/* pensamiento de la Isa cuando se equivoca */
+#phoneLayer .thought {
+  position: absolute; left: 50%; top: 11vh; transform: translateX(-50%); z-index: 3;
+  padding: 1.3vmin 3vmin; border-radius: 99vmin; background: #fff; color: #3a3f45;
+  font-family: var(--font); font-size: 2.8vmin; font-weight: 800; white-space: nowrap;
+  border: .4vmin solid #ef6aa7; box-shadow: 0 .5vmin 1.2vmin rgba(0,0,0,.35);
+}
+#phoneLayer .thought em { font-style: normal; color: #e8496b; }
+#phoneLayer .thought.pop { animation: thoughtPop .3s cubic-bezier(.3,1.6,.5,1); }
+@keyframes thoughtPop { from { transform: translateX(-50%) scale(.5); opacity: 0; } }
+
+/* barra de tiempo (tarjeta a la derecha del celular) */
+.tbar {
+  position: absolute; top: 50%; left: calc(50% + 27vh); width: min(44vmin, calc(50vw - 30vh));
+  transform: translateY(-50%);
+  padding: 2.2vmin 2.6vmin 2vmin; border-radius: 3vmin;
+  background: rgba(255,255,255,.96); border: .45vmin solid var(--sky);
+  box-shadow: 0 .8vmin 2vmin rgba(0,0,0,.35);
+  font-family: var(--font); color: #5d666f; text-align: center;
+}
+.tbar.in { animation: tbarIn .35s cubic-bezier(.3,1.5,.5,1); }
+@keyframes tbarIn { from { transform: translateY(-50%) translateX(4vmin) scale(.8); opacity: 0; } }
+.tbar.ok { animation: tbarOk .35s; border-color: #4cc46a; }
+@keyframes tbarOk { 40% { transform: translateY(-50%) scale(1.08); background: #e3f8e8; } }
+.tbar.bad { animation: tbarBad .5s; }
+@keyframes tbarBad {
+  20% { transform: translateY(-50%) translateX(-1.5vmin); background: #ffe1e8; }
+  40% { transform: translateY(-50%) translateX(1.5vmin); }
+  60% { transform: translateY(-50%) translateX(-.8vmin); }
+}
+.tb-step { font-size: 1.9vmin; font-weight: 900; color: var(--sky-dark); letter-spacing: .1em; }
+.tb-tip { font-size: 3.2vmin; font-weight: 900; margin: .4vmin 0 1.8vmin; white-space: nowrap; }
+.tb-tip b { color: #e8496b; }
+.tb-track { position: relative; height: 4.6vmin; border-radius: 99vmin; background: #e6ebf0; border: .35vmin solid #c9d1da; }
+.tb-zone { position: absolute; top: 0; bottom: 0; border-radius: 99vmin; background: linear-gradient(to bottom, #8ee59e, #3fbf5c); box-shadow: 0 0 1.4vmin rgba(63,191,92,.6); }
+.tb-needle { position: absolute; top: -1.4vmin; bottom: -1.4vmin; width: .9vmin; margin-left: -.45vmin; border-radius: 1vmin; background: #e8496b; box-shadow: 0 0 0 .3vmin #fff, 0 .3vmin .8vmin rgba(0,0,0,.3); }
+.tb-press { margin-top: 2vmin; font-size: 2.4vmin; font-weight: 900; display: flex; align-items: center; justify-content: center; gap: 1.2vmin; }
+
+/* nervios (errores, máximo 3) */
+.nervios {
+  position: absolute; left: 2.5vmin; top: 2.5vmin;
+  display: flex; align-items: center; gap: 1.4vmin;
+  padding: 1vmin 2.4vmin 1vmin 1.2vmin; border-radius: 99vmin;
+  background: rgba(255,255,255,.92); border: .38vmin solid #ef6aa7;
+  box-shadow: 0 .4vmin .8vmin rgba(60,80,100,.2);
+  font-family: var(--font);
+}
+.nervios.hit { animation: shameHit .6s; }
+.nv-face { font-size: 4.6vmin; line-height: 1; }
+.nv-label { font-size: 1.9vmin; font-weight: 900; color: #c4517a; letter-spacing: .04em; text-transform: uppercase; }
+.nv-dots { display: flex; gap: .6vmin; margin-top: .5vmin; }
+.nv-dots i { display: block; width: 6vmin; height: 1.7vmin; border-radius: 99vmin; background: #f1e3e8; border: .25vmin solid #e6c3cf; transition: background .3s; }
+.nv-dots i.on { background: linear-gradient(to bottom, #ff8fb1, #e8456f); border-color: #d83b66; }
+
+.paf {
+  position: absolute; inset: -8px; display: flex; align-items: center; justify-content: center;
+  background: #000; color: #fff; font-family: var(--font); font-size: 16vmin; font-weight: 900; letter-spacing: .05em;
+  text-shadow: 0 0 4vmin rgba(255,80,120,.8);
+}
+.paf.pop { animation: paf .5s cubic-bezier(.3,1.8,.5,1); }
+@keyframes paf { from { font-size: 4vmin; } }
+
+/* ventana angosta: la barra va abajo del celular */
+@media (max-aspect-ratio: 5/4) {
+  .tbar { left: 50%; top: auto; bottom: 18vh; width: 80vw; transform: translateX(-50%); z-index: 5; }
+}

@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Regalo para Isa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/cap4.css">
+  <link rel="stylesheet" href="css/cap5.css">
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+    }
+  }
+  </script>
+</head>
+<body class="show-cursor">
+
+  <!-- Juego 3D (se renderiza a 480p y se estira, como en una tele) -->
+  <canvas id="game"></canvas>
+
+  <!-- Rubor de pantalla (sube con la vergüenza) -->
+  <div id="blush"></div>
+  <!-- Mareo (Capítulo 3): la orilla de la pantalla se pone verde -->
+  <div id="nausea"></div>
+
+  <!-- HUD dentro del juego -->
+  <div id="hud" class="hidden">
+    <div id="prompt" class="hidden"><span class="btn-a">A</span><span id="promptText"></span></div>
+    <div id="stats" class="hidden"></div>
+    <div id="shame" class="hidden">
+      <div id="shameFace">🙂</div>
+      <div id="shameInfo">
+        <div id="shameLabel">Vergüenza</div>
+        <div id="shameBar"><i></i><i></i><i></i></div>
+      </div>
+    </div>
+    <div id="mareo" class="hidden">
+      <div id="mareoFace">😐</div>
+      <div id="mareoInfo">
+        <div id="mareoLabel">Mareo</div>
+        <div id="mareoBar"><i></i></div>
+      </div>
+    </div>
+    <div id="bubble" class="hidden"></div>
+    <div id="objective"><small>Capítulo 1</small>Encuentra al <b>grupo 68</b></div>
+    <div id="hint">
+      <span><b>WASD</b> / flechas: moverse</span>
+      <span><b>Q</b> / <b>R</b> o arrastrar: girar cámara</span>
+      <span><b>E</b> / Espacio: botón A</span>
+      <span><b>C</b>: multitud de prueba</span>
+      <span><b>Esc</b>: pausa</span>
+    </div>
+  </div>
+
+  <!-- Diálogo -->
+  <div id="dialogue" class="hidden">
+    <div id="dlgChoices"></div>
+    <div id="dlgBox">
+      <div id="dlgName"></div>
+      <div id="dlgText"></div>
+      <div id="dlgNext"></div>
+    </div>
+  </div>
+
+  <!-- Pausa -->
+  <div id="pause" class="hidden">
+    <div class="pause-bar pause-top"><span>Pausa</span></div>
+    <div class="pause-mid">
+      <button class="pill" data-act="resume">Continuar</button>
+      <button class="pill" data-act="menu">Volver al menú</button>
+    </div>
+    <div class="pause-bar pause-bottom"><span>Zona de Pruebas</span></div>
+  </div>
+
+  <!-- Fin de misión -->
+  <div id="result" class="hidden">
+    <div class="result-card">
+      <div id="resIcon"></div>
+      <h2 id="resTitle"></h2>
+      <p id="resText"></p>
+      <div id="resButtons"></div>
+    </div>
+  </div>
+
+  <!-- Menú principal -->
+  <div id="menu" class="screen hidden">
+    <div id="grid"></div>
+    <div id="bar">
+      <svg class="bar-shape" viewBox="0 0 1000 240" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="barGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#eef0f3"/>
+            <stop offset="1" stop-color="#cfd4da"/>
+          </linearGradient>
+        </defs>
+        <path d="M0,70 Q500,-30 1000,70 L1000,240 L0,240 Z" fill="url(#barGrad)"/>
+        <path d="M0,70 Q500,-30 1000,70" fill="none" stroke="#34beed" stroke-width="5" vector-effect="non-scaling-stroke"/>
+      </svg>
+      <button class="round" id="btnSound" title="Sonido">
+        <svg viewBox="0 0 48 48"><path d="M8 19h8l10-8v26l-10-8H8z" fill="currentColor"/><path class="waves" d="M31 17q5 7 0 14M35 12q9 12 0 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/></svg>
+      </button>
+      <div id="clock">
+        <div id="clockTime"><span id="clkH">00</span><span id="clkColon">:</span><span id="clkM">00</span></div>
+        <div id="clockDate"></div>
+      </div>
+      <button class="round" id="btnLetter" title="Carta">
+        <svg viewBox="0 0 48 48"><rect x="6" y="11" width="36" height="26" rx="4" fill="none" stroke="currentColor" stroke-width="3.5"/><path d="M7 14l17 13 17-13" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Pantalla del canal (al abrir una misión) -->
+  <div id="channel" class="hidden">
+    <div id="chBanner">
+      <div id="chImage"></div>
+      <div id="chTitle"></div>
+      <div id="chSub"></div>
+    </div>
+    <div id="chButtons">
+      <button class="pill" id="chBack">Menú</button>
+      <button class="pill" id="chStart">Empezar</button>
+    </div>
+  </div>
+
+  <!-- Carta -->
+  <div id="letter" class="hidden">
+    <div class="letter-card">
+      <h2 id="letterTitle"></h2>
+      <p id="letterBody"></p>
+      <button class="pill" id="letterClose">Cerrar</button>
+    </div>
+  </div>
+
+  <!-- Pantalla de inicio -->
+  <div id="boot" class="screen">
+    <div class="boot-inner">
+      <div class="boot-icon">!</div>
+      <h1>Aviso importante</h1>
+      <p>Este juego fue hecho con mucho cariño.</p>
+      <p>Antes de jugar, asegúrate de tener espacio suficiente para sonreír.</p>
+      <div class="boot-press">Presiona <span class="btn-a">A</span> para continuar</div>
+      <div class="boot-small">(clic, Enter o Espacio)</div>
+    </div>
+  </div>
+
+  <div id="fade"></div>
+
+  <div id="cursor"><img alt=""></div>
+
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>

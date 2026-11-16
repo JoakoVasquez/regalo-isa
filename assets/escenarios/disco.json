@@ -1,0 +1,29 @@
+{
+  "_info": "Disco del Capítulo 3. Coordenadas del juego: x = de izquierda a derecha mirando al escenario del DJ, z = hacia el fondo (donde están los sillones), y = arriba. El escenario está contra la pared z = 0. Lo leen tools/build_disco.py (Blender) y src/mision3.js. Rectángulos = [x0, z0, x1, z1]. Para agrandar la pista: cambia floor y tiles (1 baldosa = 1 m) y corre el resto.",
+
+  "room": [-18, 0, 18, 34],
+  "height": 6,
+
+  "floor": [-12, 4.5, 12, 22.5],
+  "tiles": [24, 18],
+
+  "stage": [-7, 0, 7, 2.8],
+  "stageH": 0.5,
+  "booth": [-2.2, 1.0, 2.2, 1.9],
+  "speakers": [[-8.5, 1.2], [8.5, 1.2]],
+
+  "bar": [-18, 7, -15.6, 25],
+  "stools": [[-14.9, 9], [-14.9, 11], [-14.9, 13], [-14.9, 15], [-14.9, 17], [-14.9, 19], [-14.9, 21], [-14.9, 23]],
+
+  "sofa": [11.2, 32.6, 15.6, 34],
+  "sofaSeats": [[12.15, 33.05], [13.4, 33.05], [14.65, 33.05]],
+  "sofaSeatH": 0.42,
+  "sofa2": [16.6, 26.2, 18, 30.6],
+  "table": [12.5, 30.4, 14.3, 31.4],
+
+  "door": [-13.5, -11.3],
+  "ball": [0, 4.7, 13.5],
+
+  "start": [0, 13.5],
+  "stranger": [16.6, 31.8]
+}
