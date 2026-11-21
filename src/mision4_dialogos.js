@@ -8,7 +8,7 @@ export const INTRO = [
   { who: 'isa', text: '*(...)*' },
   { who: 'isa', text: '*(...Espera.)*{w} *(Este reel.)*' },
   { who: 'isa', text: '*(Se lo tengo que mandar al Joaco.)*{w} *(Como broma,{w} obvio.)*' },
-  { who: 'isa', text: '*(Ya.{w} Tranquila.{w} Es solo un reel...)*{w} *(¿Por qué me tiembla la mano?)*' },
+  { who: 'isa', text: '*(Ya.{w} Tranquila.{w} Es solo un reel...)*' },
 ];
 
 // Las 3 barras de tiempo. `tip` es lo que sale en la tarjeta de la derecha.
@@ -21,7 +21,7 @@ export const BARRAS = [
 // Lo que piensa la Isa cuando falla (uno por error, en orden). Cada barra tiene los suyos.
 export const FALLOS = [
   ['*(¡No! ¡Le di like!)*', '*(¡Se me pasó el reel! Volver, volver...)*', '*(¡Ay, abrí los comentarios!)*'],
-  ['*(¡¿A mi MAMÁ?!)* Desmarcar, desmarcar...', '*(¡Al grupo 68 no!)*', '*(¿Quién es "Tía Gladys"?)*'],
+  ['*(¡¿A mi MAMÁ?!)* Desmarcar, desmarcar...', '*(¡Al grupo 68 no!)*', '*(Y este random)*'],
   ['*(¡¿"besito"?!)* ¡Borrar, borrar!', '*(¿"bromota"? ...no.)*', '*(¡Autocorrector traidor!)*'],
 ];
 // Lo que queda escrito en el cuadro de mensaje en cada fallo de la tercera barra
@@ -30,8 +30,8 @@ export const TYPOS = ['besito', 'bromota', 'brpmits'];
 export const CONTACTOS = [
   { name: 'Mamá', color: '#f0a14a' },
   { name: 'Grupo 68', color: '#5aa9e6' },
-  { name: 'Tía Gladys', color: '#9b7ad8' },
-  { name: 'Profe Cálculo', color: '#6cbf7a' },
+  { name: 'Random1', color: '#9b7ad8' },
+  { name: 'Random2', color: '#6cbf7a' },
   { name: 'Joaco', color: '#e2463a', joaco: true },
   { name: 'Papá', color: '#4f7fd1' },
 ];
@@ -54,7 +54,7 @@ export const AYUDA = '<span><b>E</b> / Espacio: tocar la pantalla</span><span><b
 export const ERRORES = 'Nervios';
 export const GANAR = {
   title: '¡Capítulo 4 completado!',
-  text: 'Reel enviado. Mensaje: "bromita".\nObvio que era broma... ¿no?',
+  text: 'Reel enviado de bromita.\nObvio que era broma...',
 };
 export const PERDER = {
   title: '¡Paf!',

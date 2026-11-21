@@ -9,7 +9,7 @@ export const SALUDOS = [
   'Hola :)',
   'Hola...{w} ¿qué tal?',
   'Buenas...',
-  'Hola, ¿cómo estái?',
+  'Hola, ¿cómo estás?',
 ];
 
 // Respuestas chistosas y pesadas de quien NO es la Isa
@@ -42,7 +42,7 @@ export const PESADOS = [
   ],
   [
     { who: 'vecino', text: 'Ah, hola.{w} Te aviso altiro que ronco en clases.' },
-    { who: 'vecino', text: 'Y hablo dormido.{w} De ti, probablemente.{w} Mal.' },
+    { who: 'vecino', text: 'Y hablo dormido.{w}' },
   ],
   [
     { who: 'vecino', text: '¿Te sentaste aquí a propósito?' },
@@ -65,7 +65,6 @@ export const PESADOS = [
 export const REACCION = [
   '*(...Me equivoqué de puesto.)*',
   '*(Esto va a ser un semestre muy largo.)*',
-  '*(¿Dónde está la Isa...?)*',
 ];
 
 // Al lado de la Isa (ya se conocen del Capítulo 1). La primera línea la dice saludando con la mano.
@@ -74,7 +73,7 @@ export const ISA = [
   { who: 'isa', text: 'Te estaba guardando el puesto.' },
   { who: 'yo', text: '¿En serio?{w} Gracias :)' },
   { who: 'isa', text: 'Si quieres después te paso los apuntes.' },
-  { who: 'yo', text: '*(...Me cae muy bien.)*' },
+  { who: 'yo', text: 'Graciass.' },
 ];
 
 // Textos de pantalla del capítulo
@@ -84,7 +83,7 @@ export const CARTEL_SENTARSE = 'Sentarse';
 export const NOMBRE_VECINO = '???';
 export const GANAR = {
   title: '¡Capítulo 2 completado!',
-  text: 'Te sentaste al lado de la Isa.\nY esta vez sí te saludaron de vuelta.',
+  text: 'Te sentaste al lado de la Isa.',
 };
 export const PERDER = {
   title: 'Puesto equivocado',

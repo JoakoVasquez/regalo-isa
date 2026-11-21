@@ -30,7 +30,7 @@ export const EQUIVOCADOS = [
     { who: 'grupo', text: `(Nadie te responde.{w} Todos te miran.{w} Es el grupo *${n}*.)` },
   ],
   (n) => [
-    { who: 'grupo', text: 'Shhh, estamos en una dinámica de presentación.' },
+    { who: 'grupo', text: 'Shhh, estamos presentandonos.' },
     {
       who: 'grupo', text: 'Di tu nombre y un animal que te represente.',
       choices: [
@@ -82,8 +82,8 @@ export const EQUIVOCADOS = [
 // Lo que dice Isa después de equivocarse (según cuánta vergüenza lleva)
 export const DISCULPAS = [
   ['Ah...{w} perdón.', 'Ok, ok...{w} perdón.', 'Jaja...{w} sí...{w} perdón.'],
-  ['Ay, no...{w} perdón otra vez.', '(Me quiero ir...)', 'Perdón...{w} ya me voy.'],
-  ['(Que me trague la tierra.)'],
+  ['Ay, no...{w} perdón otra vez.', 'Perdón...{w} ya me voy.'],
+  ['(Que mala suerte tengo.)'],
 ];
 
 // Si vuelves a preguntarle a un grupo que ya te dijo que no
@@ -94,12 +94,12 @@ export const REPETIDO = (n) => [
 // Grupo correcto
 export const CORRECTO = [
   { who: 'grupo', text: '¿El 68?{w} ¡Sí! Somos nosotros.' },
-  { who: 'isa', text: '¡Por fin!{w} Ya...{w} voy a saludar.' },
+  { who: 'isa', text: '¡Por fin!' },
 ];
-export const SALUDO_ISA = [{ who: 'isa', text: '¡Hola a todos!' }];
+export const SALUDO_ISA = [{ who: 'isa', text: '¡Holaaaa!' }];
 export const SALUDO_YO = [
   { who: 'yo', text: '¡Hola! :)' },
-  { who: 'isa', text: '*(Bueno...{w} al menos alguien me saludó.)*' },
+  { who: 'isa', text: '*(Bueno...{w} por lo menos alguien me saludó.)*' },
 ];
 
 // Textos de pantalla del capítulo
@@ -110,11 +110,11 @@ export const CARTEL_YA_PREGUNTADO = (n) => `Grupo ${n}`; // sobre un grupo al qu
 export const NOMBRE_GRUPO = 'Alguien del grupo';
 export const GANAR = {
   title: '¡Capítulo completado!',
-  text: 'Encontraste al grupo 68.\nNadie te saludó... bueno, casi nadie.',
+  text: 'Encontraste al grupo 68.',
 };
 export const PERDER = {
   title: 'Te moriste de vergüenza',
-  text: 'Tres grupos equivocados fueron demasiado.\nIsa no sobrevivió a tanta incomodidad.',
+  text: 'Tres grupos equivocados fueron demasiado.\nIsa no aguanto tanta incomodidad.',
 };
 
 export function respuestaEquivocada(n) {

@@ -20,17 +20,17 @@ export const INTRO = [
   { who: 'isa', text: 'Ya,{w} tenemos todo:{w} galletas, mantequilla, leche condensada, limones y huevos.' },
   { who: 'yo', text: '¿Y quién hace qué?' },
   { who: 'isa', text: 'Por turnos.{w} Tú partes con la base.' },
-  { who: 'yo', text: '*(Un pie de limón entre los dos.{w} ¿Qué tan difícil puede ser?)*' },
+  { who: 'yo', text: '*(Un pie de limón entre los dos.{w})*' },
 ];
 
 // ── 1 · La base (Joaco muele las galletas) ──
 export const GALLETAS_ANTES = [
-  { who: 'isa', text: 'Muele las galletas hasta que queden como arena.{w} ¡Con ganas!' },
+  { who: 'isa', text: 'Muele las galletas hasta que queden como arena.' },
 ];
 export const GALLETAS_AYUDA = 'Aprieta <span class="btn-a">A</span> rápido para moler';
 export const GALLETAS_FIN = [
   { who: 'yo', text: 'Listo.{w} Arena de galleta.' },
-  { who: 'isa', text: 'Ahora la mantequilla derretida...{w} y al molde.{w} ¡Mi turno!' },
+  { who: 'isa', text: 'Ahora la mantequilla derretida...{w} y al molde.' },
 ];
 export const PERDER_GALLETAS = {
   title: 'Galletas enteras',
@@ -63,7 +63,7 @@ export const PERDER_LIMONES_PEPAS = {
 // ── 3 · El relleno (Joaco revuelve, la Isa va echando) ──
 export const RELLENO_ANTES = [
   { who: 'isa', text: 'Yo echo la leche condensada, las yemas y el jugo.{w} Tú revuelves.' },
-  { who: 'isa', text: 'En círculos,{w} parejito.{w} Si te equivocas, salpica.' },
+  { who: 'isa', text: 'En círculos,{w} parejito.{w} Si te equivocas, te manchas.' },
 ];
 export const RELLENO_AYUDA = 'Gira: <b>↑</b> <b>→</b> <b>↓</b> <b>←</b> (o WASD) siguiendo la flecha';
 export const ECHA = ['*(echa la leche condensada)*', '*(echa las yemas)*', '*(echa el jugo de limón)*'];
@@ -78,7 +78,7 @@ export const PERDER_RELLENO_TIEMPO = {
   text: 'No alcanzaste a revolverlo todo.\nSigue la flecha sin parar.',
 };
 export const PERDER_RELLENO_SALPICA = {
-  title: 'Cocina salpicada',
+  title: 'Cocina manchada',
   text: 'Quedó más relleno en la mesa que en el bol.\nSigue el orden de las flechas.',
 };
 
@@ -93,7 +93,7 @@ export const PUNTO_NIEVE = 'Punto nieve';
 export const MUY_LENTO = '*(Muy lento...)*';
 export const MUY_RAPIDO = ['¡Saltó merengue!', '¡Me llegó a la cara!', '¡Más despacio!'];
 export const MERENGUE_FIN = [
-  { who: 'isa', text: '¡Mira!{w} Si lo doy vuelta no se cae.' },
+  { who: 'isa', text: '¡Mira!{w} Si lo doy vuelta arriba tuyo no se cae.' },
   { who: 'yo', text: '¡No lo des vuelta!' },
 ];
 export const PERDER_MERENGUE_TIEMPO = {
@@ -110,7 +110,7 @@ export const HORNO_ANTES = [
   { who: 'yo', text: 'Al horno.{w} Solo hay que dorar el merengue.' },
   { who: 'isa', text: 'Lo miramos juntos.{w} Si se quema, es culpa tuya.' },
   { who: 'yo', text: '¿Por qué mía?' },
-  { who: 'isa', text: 'Porque yo hice el merengue.' },
+  { who: 'isa', text: 'Porque yo digo.' },
 ];
 export const HORNO_AYUDA = 'Aprieta <span class="btn-a">A</span> cuando el merengue esté <b>dorado</b>';
 export const DORADO = 'Dorado';
@@ -132,8 +132,8 @@ export const PERDER_HORNO_APURADO = {
 export const FINAL = [
   { who: 'yo', text: 'Ya,{w} el primer pedazo es tuyo.' },
   { who: 'isa', text: 'Mmm...' },
-  { who: 'isa', text: '¡Está buenísimo!{w} Somos un gran equipo.' },
-  { who: 'yo', text: '*(El mejor pie de limón del mundo.)*' },
+  { who: 'isa', text: '¡Está buenísimo!{w} Somos tan buenos.' },
+
 ];
 
 export const STRIKE = 'Fallos';

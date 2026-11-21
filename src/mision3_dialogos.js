@@ -5,7 +5,7 @@
 const pick = (a) => a[Math.floor(Math.random() * a.length)];
 
 // Nombre y voz del señor de la disco (assets/miis/hombre_disco.glb)
-export const SENOR = { name: 'Señor de la disco', color: '#8a5cd6', voice: 0.65 };
+export const SENOR = { name: 'El gay mitico', color: '#8a5cd6', voice: 0.65 };
 export const AMBOS = { name: 'Joaco e Isa', color: '#e2568a', voice: 1.05 };
 
 // Al empezar: están bailando en medio de la pista y a Joaco le baja el mareo
@@ -19,7 +19,7 @@ export const INTRO = [
 
 // Lo que dice Joaco (pensando) al chocar con alguien en la pista
 export const CHOQUES = [
-  '*(¡Perdón!)*', '*(Uy...)*', '*(Permiso, permiso...)*', '*(Ay, mi guata...)*', '*(¡No me empujen!)*',
+  '*(¡Perdón!)*', '*(Uy...)*', '*(Permiso, permiso...)*', '*(Ay, mi guata...)*', '*(Uuuu tengo que ir al baño)*',
 ];
 
 // Cuando el mareo llega al máximo
@@ -30,11 +30,11 @@ export const DESMAYO = [
 
 // Escena final en el sillón
 export const SILLON = [
-  { who: 'isa', text: 'Ya,{w} aquí estamos.{w} ¿Mejor?' },
-  { who: 'yo', text: 'Un poquito...{w} gracias por acompañarme.' },
+  { who: 'isa', text: 'Ya llegamos,{w} ¿Mejor?' },
+  { who: 'yo', text: 'Algo...{w} gracias por acompañarme.' },
 ];
 export const SENOR_LLEGA = [
-  { who: 'disco', text: '¿Les molesta si me siento?{w} Estos pies ya no bailan como antes.' },
+  { who: 'disco', text: '¿Les molesta si me siento?.' },
   { who: 'yo', text: 'Eh...{w} no, tranquilo.' },
   { who: 'disco', text: 'Oigan, una pregunta...' },
   { who: 'disco', text: '¿Ustedes son *pareja*?' },
@@ -46,7 +46,7 @@ export const SENOR_FINAL = [
 ];
 export const FINAL = [
   { who: 'isa', text: '...' },
-  { who: 'yo', text: '*(...Ya no sé si estoy mareado por la pista o por otra cosa.)*' },
+  { who: 'yo', text: '*(... Locura.)*' },
 ];
 
 // Textos de pantalla del capítulo
@@ -56,11 +56,11 @@ export const CARTEL_SENTARSE = 'Sentarse';
 export const MAREO = 'Mareo';
 export const GANAR = {
   title: '¡Capítulo 3 completado!',
-  text: 'Saliste de la pista sin desmayarte.\nY un desconocido dijo lo que nadie se atrevía a decir.',
+  text: 'Saliste de la pista sin desmayarte.\nY un random se tiro tremendo predict.',
 };
 export const PERDER = {
   title: 'Demasiado mareo',
-  text: 'Joaco no alcanzó a llegar al sillón.\nLa pista de baile ganó esta vez.',
+  text: 'Joaco no alcanzó a llegar al sillón.',
 };
 
 export const choque = () => pick(CHOQUES);

@@ -9,7 +9,7 @@ export const INTRO = [
   { who: 'isa', text: 'Ya,{w} las reglas:{w} yo te pinto a ti y tú me pintas a mí.' },
   { who: 'yo', text: '¿Y si me queda mal?' },
   { who: 'isa', text: 'Imposible.{w} Solo tienes que mirarme bien.' },
-  { who: 'yo', text: '*(Eso no me cuesta nada.)*' },
+  { who: 'yo', text: '*(Facilito.)*' },
 ];
 
 // ── 1 · Mirarla ──
@@ -82,7 +82,6 @@ export const FIRMA_JOACO = 'Joaco';
 export const FINAL = [
   { who: 'yo', text: '...Quedé mejor que en la vida real.' },
   { who: 'isa', text: 'Te pinté como te veo yo.' },
-  { who: 'yo', text: '*(Este cuadro lo guardo para siempre.)*' },
 ];
 
 export const OBJETIVO = '<small>Capítulo 7</small>Pinta a la <b>Isa</b> de memoria';

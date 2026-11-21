@@ -50,7 +50,7 @@ export const CONFIG = {
   // La carta: se abre al ganar el capítulo 8 y queda en el botón del menú
   letter: {
     title: 'Para Isa',
-    body: 'Aquí va a ir un mensaje.\n(Se edita en src/config.js)',
+    body: 'Gracias por completar todo el regalito. Te queria aprovechar de decir que te amo demasiado y pienso en ti cada minuto de mi dia. Eres una increible mujer y me encanta hacer cosas asi por ti. Gracias por siempre apoyarme y por quedarte, ya es medio año juntos y espero que sean muchos mas. Eres lo mejor que me paso ❤️',
   },
 
   // Sonidos: por defecto se sintetizan. Si quieres usar archivos propios, ponlos en assets/sfx/

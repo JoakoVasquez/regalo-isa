@@ -12,7 +12,7 @@ export const INTRO = [
 ];
 
 // Lo que piensa Joaco cuando la Isa se da vuelta y no lo pilla
-export const SALVADO = ['*(Uf...)*', '*(Casi...)*', '*(No vio nada...)*', '*(Disimula, Joaco...)*'];
+export const SALVADO = ['*(Uf...)*', '*(Casi...)*', '*(No vio nada...)*', '*(Pasa piola...)*'];
 // Cuando está a punto de pillarlo
 export const CASI = ['*(¡Me está mirando!)*', '*(¡Quieto!)*', '*(¡Las flores!)*'];
 
@@ -27,7 +27,7 @@ export const PILLADO = [
 export const LLEGA = [
   { who: 'yo', text: 'Hola.' },
   { who: 'isa', text: '¡Joaco!{w} Me asustaste.' },
-  { who: 'yo', text: '*(Ya...{w} es ahora.{w} Respira.)*' },
+  { who: 'yo', text: '*(Ya...{w} es ahora.{w} Calmao.)*' },
 ];
 // La frase se va armando con cada latido acertado (un pedazo por acierto).
 export const FRASE = ['Isa...', 'te traje', 'estas flores', 'porque...', '¿quieres', 'pololear', 'conmigo?'];
@@ -47,15 +47,15 @@ export const PREGUNTA = '¿Quieres pololear conmigo?';
 export const BOTON_SI = 'Sí';
 export const BOTON_NO = 'No';
 // Lo que dice el botón "No" cada vez que se arranca (se escapa siempre; la lista se repite)
-export const NO_ESCAPA = ['No', '¿Segura?', 'Piénsalo', 'Mira las flores', 'Ni modo', 'Jamás me atraparás'];
+export const NO_ESCAPA = ['No', '¿Segura?', 'Piénsalo', 'Mira las flores', 'Nica', 'Nunca'];
 export const RESPUESTA_AYUDA = 'Responde con el mouse o con <b>←</b> <b>→</b> y <span class="btn-a">A</span>';
 
 // Final (edítalo con lo que le dijiste y lo que ella respondió de verdad)
 export const FINAL = [
   { who: 'isa', text: '¡Sí!{w} Obvio que sí.' },
-  { who: 'yo', text: '¿De verdad?' },
-  { who: 'isa', text: 'De verdad.{w} Y las flores son preciosas.' },
-  { who: 'yo', text: '*(...El mejor día.)*' },
+  { who: 'yo', text: 'Por suerte jajajaja' },
+  { who: 'isa', text: 'Las flores estan muy bonitas.' },
+  { who: 'yo', text: 'Te traje gomitas tambien :)' },
 ];
 
 // Textos de pantalla del capítulo
